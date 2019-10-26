@@ -140,3 +140,4 @@ ggplot(InsectSprays, aes(x=count,y=spray,fill=spray))+
 - [Article on ridgeline plots with ggplot2](https://rdrr.io/cran/ggridges/man/geom_density_ridges.html){target="_blank"}: Quelques exemples. Un bon point de départ pour les ridgeline plots.
 
 - [History of Ridgeline plots](https://blog.revolutionanalytics.com/2017/07/joyplots.html){target="_blank"}: Théorie des ridgeline plots.
+
