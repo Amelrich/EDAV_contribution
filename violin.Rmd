@@ -87,9 +87,3 @@ Les violin plots ne s'utilisent que sur des variables continues.
 
 ## Ressources externes
 - [ggplot2 Violin Plot](http://www.sthda.com/english/wiki/ggplot2-violin-plot-quick-start-guide-r-software-and-data-visualization){target="_blank"}: Ressource excellente pour créer et personnaliser vos violin plot.
-
-
-
-
-
-
