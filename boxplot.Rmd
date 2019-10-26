@@ -200,11 +200,11 @@ plot <- ggplot(stack(pisa), aes(x = ind, y = values)) +
 plot + theme
 ```
 
-## Resources externes
+## Ressources externes
 
 - Tukey, John W. 1977. [*Exploratory Data Analysis.*](https://clio.columbia.edu/catalog/136422){target="_blank"} Addison-Wesley. (Chapter 2): the primary source in which boxplots are first presented. 
-- [Article on boxplots with ggplot2](http://t-redactyl.io/blog/2016/04/creating-plots-in-r-using-ggplot2-part-10-boxplots.html){target="_blank"}: An excellent collection of code examples on how to make boxplots with `ggplot2`. Covers layering, working with legends, faceting, formatting, and more. If you want a boxplot to look a certain way, this article will help.
-- [Boxplots with plotly package](https://plot.ly/ggplot2/box-plots/){target="_blank"}: boxplot examples using the `plotly` package. These allow for a little interactivity on hover, which might better explain the underlying statistics of your plot.
-- [ggplot2 Boxplot: Quick Start Guide](http://www.sthda.com/english/wiki/ggplot2-box-plot-quick-start-guide-r-software-and-data-visualization){target="_blank"}: Article from [STHDA](http://www.sthda.com/english/){target="_blank"} on making boxplots using ggplot2. Excellent starting point for getting immediate results and custom formatting.
-- [ggplot2 cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf){target="_blank"}: Always good to have close by.
-- [Hadley Wickhan and Lisa Stryjewski on boxplots](http://vita.had.co.nz/papers/boxplots.pdf){target="_blank"}: good for understanding basics of more complex boxplots and some of the history behind them.
+- [Article on boxplots with ggplot2](http://t-redactyl.io/blog/2016/04/creating-plots-in-r-using-ggplot2-part-10-boxplots.html){target="_blank"}: Une excellente collection d'exemples de code sur comment réaliser des boxplots avec `ggplot2`. Cela couvre notamment le layering, les legendes, le faceting, le formatage , et plus encore. Si vous voulez votre boxplot d'une certaine manière cette page vous aidera certainement.
+- [Boxplots with plotly package](https://plot.ly/ggplot2/box-plots/){target="_blank"}: Un exemple de boxplot en utilisant le package `plotly`. En passant cela apporte par son interactivité un meilleur moyen de mettre en evidence les propriétés statistiques de votre graphique.
+- [ggplot2 Boxplot: Quick Start Guide](http://www.sthda.com/english/wiki/ggplot2-box-plot-quick-start-guide-r-software-and-data-visualization){target="_blank"}: Article de [STHDA](http://www.sthda.com/english/){target="_blank"} sur comment réaliser des boxplots avec ggplot2. Excellent point de départ avec résultat immédiat dans la personalisation et le formatage.
+- [ggplot2 cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf){target="_blank"}: Toujours bon d'y jeter un oeil.
+- [Hadley Wickhan and Lisa Stryjewski on boxplots](http://vita.had.co.nz/papers/boxplots.pdf){target="_blank"}: Bon pour comprendre les boxplots basiques comme plsu complexes ainsi que leur histoire.
