@@ -1,21 +1,21 @@
 # (PART) Multivariate Categorical {-}
 
-# Chart: Mosaic {#mosaic}
+# Diagramme : Mosaic {#mosaic}
 
 <!-- Chapter Banner -->
 ![](images/banners/banner_mosaic.png)
-*This chapter originated as a community contribution created by [harin](https://github.com/harin){target="_blank"}*
+*Ce chapitre est issu d'une contribution à la communauté crée par [harin](https://github.com/harin){target="_blank"}*
 
-*This page is a work in progress. We appreciate any input you may have. If you would like to help improve this page, consider [contributing to our repo](contribute.html).*
+*Cette page est en cours de mise à jour. Nous apprécions toute remarque que vous puissiez avoir. Pour nous aider à améliorer cette page, vous pouvez [contribuer à notre repo](contribute.html).*
 
 ```{r include=FALSE}
 df = read.csv("data/MusicIcecream.csv")
 ```
 
 
-## Overview
+## Vue d'ensemble
 
-This section covers how to make Mosaic plots
+Cette section explique comment faire des graphiques en Mosaïque (Mosaic Plots)
 
 ## tl;dr
 
@@ -31,69 +31,69 @@ mosaic(Favorite ~ Age + Music,
        df)
 ```
 
-## Order of splits
+## L'ordre des coupes
 
-It is best to draw mosaic plots incrementally: start with splitting on one variable and then add additional variables one at a time. The full mosaic plot will have one split per variable.
+Il est préférable de dessiner des graphiques en mosaïque de façon incrémentale: commencez en coupant selon une variable, puis ajoutez des variables une par une. Le graphique en mosaïque complet devrait avoir une seule coupe par variable.
 
-Important: if your data is in a data frame, as in the example below, **the count column must be called `Freq`**. (Tables and matrices also work, see `?vcd::structable` for more details.)
+Important: si vos données sont dans un data frame, comme c'est le cas ci-dessous, **la colonne count doit être appellée `Freq`**. (Aussi valable pour les tables et les matrices, voir `?vcd::structable` pour plus de détails.)
 
-Also note that all of these plots are drawn with `vcd::mosaic()` not the base R function, `mosaicplot()`.
+Veuillez aussi noter que ces graphiques sont dessinés avec `vcd::mosaic()` et non la fonction en R élémentaire, `mosaicplot()`.
 
-The data:
+Les données:
 ``` {r}
 df
 ```
 
-Split on `Age` only:
+Coupe uniquement selon `Age`:
 
 ``` {r}
 library(vcd)
 mosaic(~Age, df)
 ```
 
-Split on `Age`, then `Music`:
+Coupe selon `Age`, puis `Music`:
 
 ```{r}
 mosaic(Music ~ Age, df)
 ```
 
-Note that the *first* split is between "young" and "old", while the second set of splits divides each age group into "classical" and "rock".
+Notez que la *première* coupe est entre "young" et "old", tandis que la deuxième série de coupes divise chaque groupe d'âge entre "classical" et "rock".
 
-Split on `Age`, then `Music`, then `Favorite`:
+Coupe selon `Age`, puis `Music`, puis `Favorite`:
 
 ```{r}
 mosaic(Favorite ~ Age + Music, df)
 ```
 
-## Direction of splits
+## Direction des coupes
 
-Note that in the previous example, the direction of the splits is as follows:
+Notez que dans l'exemple précédent, la direction des coupes est faite comme suit:
 
-1.  `Age` -- horizontal split
+1.  `Age` -- coupe horizontale
 
-2.  `Music` -- vertical split
+2.  `Music` -- coupe verticale
 
-3.  `Favorite` -- horizontal split
+3.  `Favorite` -- coupe horizontale
 
-This is the default direction pattern: alternating directions beginning with horizontal. Therefore we get the same plot with the following:
+Il s'agit du schéma usuel de direction de coupes: les directions alternent en commençant par une coupe horizontale. On en déduit le même graphique avec:
 
 ```{r}
 mosaic(Favorite ~ Age + Music, 
        direction = c("h", "v", "h"), df)
 ```
 
-The directions can be altered as desired. For example, to create a doubledecker plot, make all splits vertical except the last one:
+Les directions peuvent être modifiées comme comme vous le souhaitez. Par exemple, pour créer un graphique de type "doubledecker", toutes les coupes doivent être verticales sauf la dernière:
 
 ```{r}
 mosaic(Favorite ~ Age + Music,
        direction = c("v", "v", "h"), df)
 ```
 
-Note that the direction vector is in order of splits (`Age`, `Music`, `Favorite`), not in the order in which the variables appear in the formula, where the last variable to be split is listed first, before the "~".
+Notez que le vecteur des directions est ordonné selon l'ordre des coupes (`Age`, `Music`, `Favorite`), et non selon l'ordre dans lequel les variables apparaissent dans la formule, où la dernière variable à être coupée apparaît en premier dans la formule, avant le "~".
 
-## Color
+## Couleur
 
-### Fill color
+### Couleur de fond
 
 ```{r}
 library(grid) # needed for gpar
@@ -102,7 +102,7 @@ mosaic(Favorite ~ Age + Music,
        df)
 ```
 
-### Border color (must also set fill(?))
+### Couleur de bordure (il faut également définir la couleur de fond(?))
 
 ```{r}
 mosaic(Favorite ~ Age + Music,
@@ -113,13 +113,13 @@ mosaic(Favorite ~ Age + Music,
 ```
 
 
-## Labels
+## Etiquettes
 
-For official documentation on labeling options, see [Labeling in the Strucplot Framework](http://ftp.auckland.ac.nz/software/CRAN/doc/vignettes/vcd/labeling.pdf){target="_blank"}
+Pour la documentation officielle sur les options d'étiquettage, voir [Labeling in the Strucplot Framework](http://ftp.auckland.ac.nz/software/CRAN/doc/vignettes/vcd/labeling.pdf){target="_blank"}
 
-### Rotate labels
+### Faire pivoter les étiquettes
 
-The `rot_labels =` vector sets the rotation in degrees on the four sides of the plot--not on variable split order--in this order: *top, right, bottom, left*. (Different from the typical base graphics order!) The default is `rot_labels = c(0, 90, 0, 90)`.
+Le vecteur `rot_labels =` définit la rotation en degrés sur les quatre côtés du graphique--pas selon l'ordre de coupe des variables--dans cet ordre: *haut, droite, bas, gauche*. (C'est un ordre différent de l'ordre par défaut des graphiques élémentaires!) L'ordre par défaut est `rot_labels = c(0, 90, 0, 90)`.
 
 ```{r}
 mosaic(Favorite ~ Age + Music, 
@@ -128,11 +128,11 @@ mosaic(Favorite ~ Age + Music,
 ```
 
 
-### Abbreviate labels
+### Alléger les étiquettes
 
-Labels are abbreviated in the order of the splits (as for `direction =`). The abbreviation algorithm appears to return the specified number of characters after vowels are eliminated (if necessary).
+Les étiquettes sont abrégées dans l'ordre des coupes (comme avec `direction =`). L'algorithme d'abbréviation renvoit le nombre indiqué de charactères après suppression des voyelles (si nécessaire).
 
-For more formatting options, see `>?vcd::labeling_border`.
+Pour plus d'options sur le format, voir `>?vcd::labeling_border`.
 
 ```{r}
 mosaic(Favorite ~ Age + Music, 
@@ -140,7 +140,7 @@ mosaic(Favorite ~ Age + Music,
        df)
 ```
 
-## Cell spacing
+## Agencement des cellules
 
 ```{r}
 mosaic(Favorite ~ Age + Music,
@@ -148,10 +148,10 @@ mosaic(Favorite ~ Age + Music,
        df)
 ```
 
-For more details, see `>?vcd::spacings`
+Pour plus de détails, voir `>?vcd::spacings`
 
 
-### Mosaic using vcd::doubledecker
+### Mosaïque en utilisant vcd::doubledecker
 
 ```{r}
 data(Arthritis)
@@ -163,9 +163,9 @@ vcd::doubledecker(Music ~ Favorite + Age,
                   xtabs(Freq ~ Age + Music + Favorite, df))
 ```
 
-## Mosaic using ggplot
+## Mosaique en utilisant ggplot
 
-For a comprehensive overview of mosaic plot in ggplot check out the link below.
+Pour avoir une vue d'ensemble sur les graphiques en mosaïques avec ggplot, voir le lien ci-dessous.
 [https://cran.r-project.org/web/packages/ggmosaic/vignettes/ggmosaic.html](https://cran.r-project.org/web/packages/ggmosaic/vignettes/ggmosaic.html){target="_blank"}
 
 ```{r message=FALSE}
@@ -183,39 +183,39 @@ ggplot(df) +
 ```
 
 
-## Theory
+## Théorie
 
-## When to use
+## Quand l'utiliser
 
-When you want to see the relationships in Multivariate Categorical Data
+Quand vous voulez étudier les liens entre les variables d'un jeu de données Catégoriques Multivariées
 
 ## Considerations
 
-### Labels
+### Etiquettes
 
-Legibility of the labels is problematic in mosaic plot especially when there are a lot of dimensions. This can be alleviated by
-- Abbreviate names
-- Rotating the labels
+La lisibilité des étiquettes pose problème dans les graphiques en mosaïque, particulièrement quand il y a beaucoup de dimensions. Ceci peut être allégé en
+- Racourcissant les noms
+- Faisant pivoter les étiquettes
 
 ### Aspect Ratio
-- lengths are easier to judge than area, so try to use rectangles with same width or height
-- Taller thinner rectangles are better (we are better at distinguishing length than area)
+- Les longueurs sont plus faciles à évaluer que les aires. Essayez d'utiliser des rectangles de même épaisseur ou hauteur
+- Les rectangles longs et fins sont préférables (on distinge plus facilement les longueurs que les aires)
 
-### Gaps between rectangles
-- No gap = most efficient
+### Espace entre les rectangles
+- Pas d'espace = le plus efficace
 
-However, a gap can help improve legibility, so try out different combinations
+Néanmoins, un espace peut améliorer la lisibilitén donc essayez différentes combinaisons.
 
-- Can have a gap at splits
-- Can Vary gap size down the hierarchy
+- On peut avoir des espaces au niveau des coupes
+- On peut faire varier la taille des espaces selon la hierarchie
 
-### Color
-- good for rates in the subgroup
-- displaying residual
-- emphasizing particular subgroup
+### Couleur
+- bien pour les rapports dans le sous-groupe
+- Affiche les groupes résiduels
+- met en avant un sous-groupe particulier
 
-## External resources
+## Ressources externes
 
-- Chapter 7 of [Graphical data analysis with R by Anthony Unwin](https://www.crcpress.com/Graphical-Data-Analysis-with-R/Unwin/p/book/9781498715232){target="_blank"}
+- Chapitre 7 de [Graphical data analysis with R by Anthony Unwin](https://www.crcpress.com/Graphical-Data-Analysis-with-R/Unwin/p/book/9781498715232){target="_blank"}
 
-- [Link](https://cran.r-project.org/web/packages/ggmosaic/vignettes/ggmosaic.html){target="_blank"}: A comprehensive overview of mosaic plot in ggplot check out the link below.
+- [Lien](https://cran.r-project.org/web/packages/ggmosaic/vignettes/ggmosaic.html){target="_blank"}: Une vue d'ensemble des graphiques en mosaïque avec ggplot au lien ci-joint.
