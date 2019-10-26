@@ -8,9 +8,10 @@ knitr::opts_chunk$set(fig.align = 'center', out.width = '60%')
 ![](images/banners/banner_boxplot.png)
 
 ## tl;dr
-I want a nice example and I want it NOW!
 
-Here's a look at the weights of newborn chicks split by the feed supplement they received:
+Je veux un exemple sympa et je le veux MAINTENANT !
+
+Voici un aperçu d'une répartition des poids des poussins selon le supplément de nourriture qu'ils ont reçus :
 
 ```{r tldr-show-plot, echo=FALSE, out.width='75%'}
 library(ggplot2)
@@ -29,34 +30,35 @@ ggplot(chickwts, aes(x = reorder(feed, -weight, median), y = weight)) +
   theme(plot.caption = element_text(color = "grey68"))
 ```
 
-And here's the code:
+Et en voici le code :
 ```{r, ref.label="tldr-show-plot", eval=FALSE}
 ```
 
-For more info on this dataset, type `?datasets::chickwts` into the console.
+Pour plus d'informations sur le jeu de données, tapez `?datasets::chickwts` au sein du terminal.
 
-## Simple examples
-Okay...*much* simpler please.
+## Exemples simples
 
-### Single boxplots
+D'accord... *Réellement* plus simple s'il-vous-plaît.
 
-Base R will give you a quick boxplot of a vector or a single column of a data frame with very little typing:
+### Boxplots unique
+
+R vous donne de base un rapide "boxplot" (littéralement *boite à moustache* en français) d'un vecteur ou d'une colonne unique basée sur une trame de données, et cela avec très peu de code :
 
 ```{r base-r, fig.align = 'center', out.width='60%'}
 # vector
 boxplot(rivers) 
 ```
 
-Or, the horizontal version:
+Ou bien sa version horizontale :
 
 ```{r}
 # single column of a data frame
 boxplot(chickwts$weight, horizontal = TRUE) 
 ```
 
-Creating a single boxplot in **ggplot2** is somewhat problematic. (The joke is that it's the package author's way of saying that if you only have one group, make a histogram instead!)  
+Créer un boxplot unique avec **ggplot2** est quelque peu problématique. (La blague est que c'est la manière de l'auteur du package de vous dire que si vous avez un groupe, faites plutôt un histogramme !)
 
-If you only include one aesthetic mapping, it will be assumed to the `x` (group) variable and you will get an error:
+Si vous n'incluez qu'une correspondance esthétique, la variable `x` (en tant que groupe) sera supposée et vous aurez une erreur :
 
 ```{r, eval=FALSE}
 ggplot(chickwts, aes(weight)) + geom_boxplot()
@@ -66,7 +68,7 @@ ggplot(chickwts, aes(weight)) + geom_boxplot()
 Error: stat_boxplot requires the following missing aesthetics: y
 ```
 
-This can be remedied by adding `y = ` to indicate that `weight` is the numeric variable, but you'll still get a meaningless x-axis:
+Cela peut être corrigé par `y = ` pour indiquer que `weight` est la variable numérique, mais vous aurez malgré tout un axe *x* dénué de sens :
 
 ```{r}
 ggplot(chickwts, aes(y = weight)) + 
@@ -74,22 +76,22 @@ ggplot(chickwts, aes(y = weight)) +
   theme_grey(16) # make all font sizes larger (default is 11)
 ```
 
-Another, cleaner approach is to create a name for the single group as the `x` aesthetic and remove the x-axis label:
+Une approche plus propre consiste à créer un nom pour le groupe unique, l'esthétique `x` et à supprimer le libellé de l'axe *x* :
 
 ```{r}
 ggplot(chickwts, aes(x = "all 71 chickens", y = weight)) + 
   geom_boxplot() + xlab("") + theme_grey(16)
 ```
 
-### Multiple boxplots using ggplot2
+### Boxplots multiples utilisant ggplot2
 
-To create multiple boxplots with **ggplot2**, your data frame needs to be tidy, that is you need to have a column with levels of the grouping variable. It can be be factor, character, or integer class.
+Pour créer des boxplots multiples avec **ggplot2**, votre trame de données nécessite d'être ordonnée ; formulé autrement, vous avez besoin d'une colonne avec des niveaux de la variable de groupement. Cela peut être une classe de facteurs, de caractères ou de chiffres.
 
 ```{r}
 str(chickwts)
 ```
 
-We see that `chickwts` is in the right form: we have a `feed` column with six factor levels, so we can set the the `x` aesthetic to `feed`. We also order the boxplots by *decreasing median weight*:
+Nous voyons que `chickwts` a la bonne apparence: Nous avons une colonne `feed` avec 6 niveaux de facteurs, de sorte que nous pouvons définir l'esthétique `x` à `feed`. Nous ordonnons également les boxplots en *diminuant le poids médian* :
 
 ```{r}
 ggplot(chickwts, aes(x = reorder(feed, -weight, median), y = weight)) +
@@ -98,7 +100,7 @@ ggplot(chickwts, aes(x = reorder(feed, -weight, median), y = weight)) +
   theme_grey(16)
 ```
 
-Data frames that contain a separate column of values for each desired boxplot must be tidied first. (For more detail on using `tidy::gather()`, see [this tutorial](https://github.com/jtr13/codehelp/blob/master/R/gather.md){target="_blank"}.)
+Les trames de données qui contiennent une colonne séparée de valeurs pour chaque boxplot désiré doivent être ordonnées d'abord. (Pour plus de détails sur l'utilisation de `tidy::gather()`, voir [ce tutoriel](https://github.com/jtr13/codehelp/blob/master/R/gather.md){target="_blank"}.)
 
 ```{r, message=FALSE}
 library(tidyverse)
@@ -107,7 +109,7 @@ tidyattitude <- attitude %>% gather(key = "question", value = "rating")
 head(tidyattitude)
 ```
 
-Now we're ready to plot:
+Maintenant nous sommes prêts à tracer :
 
 ```{r}
 ggplot(tidyattitude, aes(reorder(question, -rating, median), rating)) + 
@@ -116,28 +118,28 @@ ggplot(tidyattitude, aes(reorder(question, -rating, median), rating)) +
   theme_grey(16)
 ```
 
+## Théorie
 
-## Theory
+Voici une citation de Hadley Wickham qui résume les boxplots plutôt bien :
 
-Here's a quote by Hadley Wickham  that sums up boxplots nicely:
-
->The boxplot is a compact distributional summary, displaying less detail than a histogram or kernel density, but also taking up less space. Boxplots use robust summary statistics that are always located at actual data points, are quickly computable (originally by hand), and have no tuning parameters. They are particularly useful for comparing distributions across groups. - Hadley Wickham
+>Un boxplot est un résumé de distribution compacte, affichant moins de détails qu'un histogramme ou que la densité d'un noyau, mais qui prend également moins d'espace. Les boxplots utilisent des statistiques récapitulatives robustes qui sont constamment localisées à des points de données actuels, qui sont rapidement calculables (à l'origine, à la main), et qui n'ont aucun paramètre d'optimisation. Ils sont particulièrement utiles pour comparer les distributions au travers de groupes. - Hadley Wickham
 >
 
-Another important use of the boxplot is in showing outliers. A boxplot shows how much of an outlier a data point is with quartiles and fences. Use the boxplot when you have data with outliers so that they can be exposed. What it lacks in specificity it makes up with its ability to clearly summarize large data sets.
+Un autre usage important du boxplot est l'affichage de valeurs abérrantes. Un boxplot révèle combien abérrante un point de données peut être avec des quartiles et des clôtures. Utilisez le boxplot lorsque vous avez des données avec des valeurs abérrantes de sorte qu'elles soient exposées. Ce qui lui manque en spécificité, il le contre-balance avec sa capacité à résumer clairement de larges jeux de données.
 
-*   For more info about boxplots and continuous variables, check out [Chapter 3](http://www.gradaanwr.net/content/03-examining-continuous-variables/){target="_blank"} of the textbook. 
+* Pour plus d'informations sur les boxplots et les variables continues, jetez un coup d'oeil au [Chapitre 3](http://www.gradaanwr.net/content/03-examining-continuous-variables/){target="_blank"} du livre. 
 
-## When to use
+## Quand l'utiliser
 
-Boxplots should be used to display *continuous variables*. They are particularly useful for identifying outliers and comparing different groups. 
+Les boxplots devraient être utilisés pour afficher des *variables continues*. Ils sont particulièrement utiles pour identifier les valeurs abérrantes et comparer différents groupes. 
 
-*Aside*: Boxplots may even help you [convince someone you are their outlier](https://xkcd.com/539/){target="_blank"} (If you like it when people over-explain jokes, [here is why that comic is funny](https://www.explainxkcd.com/wiki/index.php/539:_Boyfriend){target="_blank"}.). 
+*Note* : Les boxplots peuvent même parfois vous aider [à convaincre quelqu'un que vous êtes leur valeur abérrante](https://xkcd.com/539/){target="_blank"} (Si vous aimez quand les gens détaillent leurs blagues, [voici pourquoi cette BD est drôle](https://www.explainxkcd.com/wiki/index.php/539:_Boyfriend){target="_blank"}.). 
 
-## Considerations
+## Considérations
 
-### Flipping orientation
-Often you want boxplots to be horizontal. Super easy to do in **ggplot2**: just tack on `+ coord_flip()` and remove the `-` from the reordering so that the factor level with the highest median will be on top:
+### Orientation retournée
+
+La plupart du temps, vous souhaiterez des boxplots horizontaux. C'est super facile avec **ggplot2** : faites juste un `+ coord_flip()` et supprimez le `-` du réordonnement de sorte que le niveau de facteur avec la plus haute médiane soit au-dessus :
 
 ```{r flip-boxplot}
 ggplot(tidyattitude, aes(reorder(question, rating, median), rating)) + 
@@ -147,7 +149,7 @@ ggplot(tidyattitude, aes(reorder(question, rating, median), rating)) +
   theme_grey(16)
 ```
 
-Note that switching `x` and `y` insteading of using `coord_flip()` doesn't work!
+Notez que permuter `x` et `y` plutôt que d'utiliser `coord_flip()` ne marche pas !
 
 ```{r}
 ggplot(tidyattitude, aes(rating, reorder(question, rating, median))) + 
@@ -157,11 +159,11 @@ ggplot(tidyattitude, aes(rating, reorder(question, rating, median))) +
   theme_grey(16)
 ```
 
-### NOT for categorical data
+### PAS pour des données catégorielles
 
-Boxplots are great, but they do NOT work with categorical data. Make sure your variable is continuous before using boxplots.
+Les boxplots sont super, mais ils ne marchent pas avec les données catégorielles. Vérifiez que votre variable est continue avant d'utiliser les boxplots.
 
-The data in this example are variables from the `pisaitems` dataset in the **likert** package with ratings of 1, 2, 3 or 4:
+Les données dans l'exemple suivant sont des variables du jeu de données `pisaitems` au sein du package **likert** avec des taux de 1, 2, 3 ou 4:
 
 ```{r, echo = FALSE, message=FALSE}
 library(likert) # data
@@ -178,7 +180,7 @@ pisa <- pisaitems[1:100, 2:7] %>%
 head(pisa, 4)
 ```
 
-Creating a boxplot from this data is a good example of what *not* to do:
+Créer un boxplot à partir de ces données est un bon exemple de ce qu'il ne faut *pas* faire :
 
 ```{r bad-boxplots, message=FALSE, echo = FALSE, out.width='75%'}
 # create theme
@@ -198,7 +200,7 @@ plot <- ggplot(stack(pisa), aes(x = ind, y = values)) +
 plot + theme
 ```
 
-## External resources
+## Resources externes
 
 - Tukey, John W. 1977. [*Exploratory Data Analysis.*](https://clio.columbia.edu/catalog/136422){target="_blank"} Addison-Wesley. (Chapter 2): the primary source in which boxplots are first presented. 
 - [Article on boxplots with ggplot2](http://t-redactyl.io/blog/2016/04/creating-plots-in-r-using-ggplot2-part-10-boxplots.html){target="_blank"}: An excellent collection of code examples on how to make boxplots with `ggplot2`. Covers layering, working with legends, faceting, formatting, and more. If you want a boxplot to look a certain way, this article will help.
@@ -206,8 +208,3 @@ plot + theme
 - [ggplot2 Boxplot: Quick Start Guide](http://www.sthda.com/english/wiki/ggplot2-box-plot-quick-start-guide-r-software-and-data-visualization){target="_blank"}: Article from [STHDA](http://www.sthda.com/english/){target="_blank"} on making boxplots using ggplot2. Excellent starting point for getting immediate results and custom formatting.
 - [ggplot2 cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf){target="_blank"}: Always good to have close by.
 - [Hadley Wickhan and Lisa Stryjewski on boxplots](http://vita.had.co.nz/papers/boxplots.pdf){target="_blank"}: good for understanding basics of more complex boxplots and some of the history behind them.
-
-
-
-
-
