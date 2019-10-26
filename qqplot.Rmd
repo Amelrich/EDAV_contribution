@@ -81,4 +81,3 @@ ggplot(mtcars, aes(sample = mpg, colour = factor(cyl))) +
 - [Probability plotting methods for the analysis of data](https://www.jstor.org/stable/2334448?seq=1#metadata_info_tab_contents){target="_blank"}: Article sur les techniques d'affichage notamment pour les qqplots. (Wilk, M.B.; Gnanadesikan, R. (1968))
 - [QQ-Plot Wiki](https://en.wikipedia.org/wiki/Q%E2%80%93Q_plot#cite_note-1){target="_blank"}: Wikipedia sur les qqplots
 
-
