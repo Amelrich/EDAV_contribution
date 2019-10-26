@@ -71,5 +71,3 @@ contributors <- contributors %>%
 
 cat(paste0(contributors$desc, collapse = ", "))
 ```
-
-
