@@ -1,7 +1,7 @@
 ---
 output: html_document
 ---
-# R Basics {#basics} 
+# Les bases de R {#basics} 
 
 ![](images/banners/banner_basics.png)
 
@@ -10,11 +10,11 @@ package_num <- dim(available.packages(repos = "http://cloud.r-project.org/"))[1]
 numpack <- floor(package_num / 100) * 100
 ```
 
-So...there is soooo much to the world of R. Textbooks, cheatsheets, exercises, and other buzzwords full of resources you could go through. There are over `r format(numpack, scientific=FALSE)` packages on [CRAN](https://cran.r-project.org){target="_blank"}, the network through which R code and packages are distributed. It can be overwhelming.  However, bear in mind that R is being used for a lot of different things, not all of which are relevant to EDAV. 
+Donc... Il y a tellement de choses qui peuplent le monde de R. Des livres, des astuces, des exercices, et plus d'autres buzzwords plein de ressources que vous pouvez parcourir. Il y a plus de `r format(numpack, scientific=FALSE)` packages sur [CRAN](https://cran.r-project.org){target="_blank"}, le réseau au travers duquel le code R et ses packages sont distribués. Cela peut sembler écransant mais pour autant, gardez à l'esprit que R est utilisé pour beaucoup de chose, et toutes ne sont pas nécessaires dans le cadre de EDAV. 
 
-In an effort to get everyone on the same page, here is a checklist of essentials so you can get up and running with this course. The best resources are scattered in different places online, so bear with links to various sites depending on the topic.
+Dans un effort de garder tout le monde au même niveau, voici une liste d'éléments essentiels de sorte que vous serez paré pour ce cours. Les meilleures ressources sont disséminées en différents endroits, en ligne, donc parcourez les liens des divers sites web en fonction des sujets.
 
-## Top 10 Essentials Checklist
+## Top 10
 
 (*r4ds* = [R for Data Science](https://r4ds.had.co.nz/) by Garrett Grolemund and Hadley Wickham, free online)
 
