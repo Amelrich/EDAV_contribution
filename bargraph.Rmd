@@ -4,16 +4,16 @@
 
 ![](images/banners/banner_bargraph.png)
 
-## Overview
+## Avant-propos
 
-This section covers how to make bar charts
+Cette section est dédiée à comment faire des bar charts.
 
 ## tl;dr
-<!-- Gimme example -->
-I want a nice example. Not tomorrow, not *after breakfast*. NOW! 
+<!-- Donne moi un exemple -->
+Je veux un exemple sympa. Pas demain, pas *après le p'tit dej*. Tout de suite !!
 
-<!-- Explanation: -->
-Here's a bar chart showing the survival rates of passengers aboard the *RMS Titanic*:
+<!-- Explication : -->
+Voici un bar chart qui montre le taux de survie des passagers à bord du *RMS Titanic* :
 
 ```{r tldr-show-plot, echo=FALSE, message=FALSE, fig.width=9, fig.height=6}
 library(datasets) # data
@@ -40,7 +40,7 @@ ggplot(ship_grouped, aes(x = Survived, y = Total, fill = Sex)) +
   theme(plot.caption = element_text(color = "grey68"))
 ```
 
-And here's the code:
+Et voilà le code :
 ```{r tldr-code, eval=FALSE}
 library(datasets) # data
 library(ggplot2) # plotting
@@ -67,14 +67,14 @@ ggplot(ship_grouped, aes(x = Survived, y = Total, fill = Sex)) +
   theme(plot.caption = element_text(color = "grey68"))
 ```
 
-For more info on this dataset, type `?datasets::Titanic` into the console.
+Pour plus d'inforamtion sur le jeu de données, tapez `?datasets::Titanic` dans le terminal.
 
-## Simple examples
+## Exemples simples
 <!-- Simplify Note -->
-My eyes were bigger than my stomach. Much simpler please!
+J'ai eu les yeux plus gros que le ventres. Plus simple svp !
 
 <!-- Simple Explanation of Data: -->
-Let's use the `HairEyeColor` dataset. To start, we will just look at the different categories of hair color among females:
+Utilisons plutôt le jeu de données `HairEyeColor`. Pour commencer, nous allons juste regarder les différents catégories de couleurs de cheveux au sein de la population féminine :
 ```{r simple-example-data}
 colors <- as.data.frame(HairEyeColor)
 
@@ -88,9 +88,9 @@ colors_female_hair <- colors %>%
 head(colors_female_hair)
 ```
 
-Now let's make some graphs with this data.
+Maintenant faisons quelques graphiques avec ces données.
 
-### Bar graph using base R
+### Bar chart avec la base R
 ```{r base-r}
 barplot(colors_female_hair[["Total"]], 
         names.arg = colors_female_hair[["Hair"]],
@@ -98,9 +98,9 @@ barplot(colors_female_hair[["Total"]],
 ```
 
 <!-- Base R Plot Explanation -->
-We recommend using Base R only for simple bar graphs for yourself. Like all of Base R, it is simple to setup. **Note**: Base R expects a vector or matrix, hence the double brackets in the barplot call (gets columns as lists).
+Nous recommendons la base R uniquement pour les bar chart simples ou pour votre usage personnel. Comme tous les autres graphiques la base R est simple à mettre en oeuvre. **Note** : La base R requière un vecteur ou une matrice, en d'autres termes l'objet avec doubles crochets dans l'appel à barplot (qui permet de récupérer les colones comme des listes).
 
-### Bar graph using ggplot2
+### Bar chart avec ggplot2
 ```{r ggplot}
 library(ggplot2) # plotting
 
@@ -110,21 +110,21 @@ ggplot(colors_female_hair, aes(x = Hair, y = Total)) +
 ```
 
 <!-- ggplot2 explanation -->
-Bar plots are very easy in `ggplot2`. You pass in a dataframe and let it know which parts you want to map to different aesthetics. **Note**: In this case, we have a table of values and want to plot them as explicit bar heights. Because of this, we specify the y aesthetic as the `Total` column, but we also have to specify `stat = "identity"` in `geom_bar()` so it knows to plot them correctly. Often you will have datasets where each row is one observation and you want to group them into bars. In that case, the y aesthetic and `stat = "identity"` do not have to be specified.
+Les bar chart sont très simple avec `ggplot2`. Il suffit de lui passer en argument un dataframe et les différentes aesthetics qui vous intéresse. **Note** : Dans ce cas, on a une table de valeurs et on veut explicitement représenter des barres par en hauteur. A cause de ça, on précise l'aesthetic y comme colonne `Total`, mais on doit également spécifier `stat = "identity"` dans `geom_bar()` pour que le module sache ce qu'il faut afficher et le faire correctement. Souvent vous aurez des jeux de données où chaque ligne est une observation et vous voudrez les grouper dans les barres. Dans ce cas là l'aesthetic y et `stat = "identity"` n'auront pas besoin d'être précisé.
 
-## Theory
+## Théorie
 <!-- *Link to textbook -->
-*   For more info about plotting categorical data, check out [Chapter 4](http://www.gradaanwr.net/content/04-displaying-categorial-data/){target="_blank"} of the textbook.
+*   Pour plus d'info sur l'affichage des données de type catégorielle, regardez [Chapter 4](http://www.gradaanwr.net/content/04-displaying-categorial-data/){target="_blank"} dans le livre.
 
-## When to use
+## Quand utiliser ?
 <!-- Quick Note on When to use this plot -->
-Bar Charts are best for *categorical data*. Often you will have a collection of factors that you want to split into different groups. 
+Les bar charts s'utilisent essentiellement pour les *données catégorielles*. Souvent vous aurez une collection de facteurs que vous voudrez diviser en différents groupes.
 
-## Considerations
+## Considérations
 
 <!-- *   List of things to pay attention to with examples -->
-### Not for continuous data
-If you are finding that your bar graphs aren't looking right, make sure your data is categorical and not continuous. If you want to plot continuous data using bars, that is what [histograms](histo.html) are for!
+### Pas pour les données continues..
+Si vous trouvez que votre bar chart n'a pas un aspect agréable, vérifiez que vous données sont bien catégorielles et pas continues. Si vous voulez afficher des données continues avec des barres, c'est le job des [histogrammes](histo.html)
 
 ## Modifications
 <!-- Things to add on -->
@@ -132,10 +132,10 @@ If you are finding that your bar graphs aren't looking right, make sure your dat
 - Flip bars
 - Facet Wrap
 -->
-These modifications assume you are using `ggplot2`.
+ces modifications suppose l'utilisation de `ggplot2`.
 
-### Flip Bars
-To flip the orientation, just tack on `coord_flip()`:
+### Inversion des barres
+Pour inverser l'orientation des barres, ajouter un `coord_flip()` :
 ```{r coord-flip}
 ggplot(colors_female_hair, aes(x = Hair, y = Total)) +
   geom_bar(stat = "identity") +
@@ -143,21 +143,21 @@ ggplot(colors_female_hair, aes(x = Hair, y = Total)) +
   coord_flip()
 ```
 
-### Reorder the bars
-With both base R and **ggplot2** bars are drawn in alphabetical order for character data and in the order of factor levels for factor data. However, since the default order of levels for factor data is alphabetical, the bars will be alphabetical in both cases. Please see [this tutorial](https://github.com/jtr13/codehelp/blob/master/R/reorder.md){target="_blank"} for a detailed explanation on how bars should be ordered in a bar chart, and how the **forcats** package can help you accomplish the reordering.
+### Reordonner les barres
+En base R comme avec **ggplot2** les barres apparaissent par ordre alphabétique. Regardez [ce tutoriel](https://github.com/jtr13/codehelp/blob/master/R/reorder.md){target="_blank"} pour une explication détaillée sur comment les barres doivent être ordonnées dans un bar chart, et comment le package **forecats** peut vous y aider. 
 
 ### Facet Wrap
-You can split the graph into small multiples using `facet_wrap()` (don't forget the tilde, ~):
+Vous pouvez séparer un graphique en plusieurs petit sous-graphique en utilisant `facet_wrap()` (n'oubliez pas le tilde, ~):
 ```{r small-multiples}
 ggplot(colors, aes(x = Sex, y = Freq)) +
   geom_bar(stat = "identity") +
   facet_wrap(~Hair)
 ```
 
-## External resources
+## Ressources externes
 <!-- - [](){target="_blank"}: Links to resources with quick blurb -->
-- [Cookbook for R](http://www.cookbook-r.com/Manipulating_data/Changing_the_order_of_levels_of_a_factor/){target="_blank"}: Discussion on reordering the levels of a factor.
-- [DataCamp Exercise](https://campus.datacamp.com/courses/data-visualization-with-ggplot2-2/chapter-4-best-practices?ex=4#skiponboarding){target="_blank"}: Simple exercise on making bar graphs with `ggplot2`.
-- [ggplot2 cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf){target="_blank"}: Always good to have close by.
+- [Cookbook for R](http://www.cookbook-r.com/Manipulating_data/Changing_the_order_of_levels_of_a_factor/){target="_blank"}: Discussion sur comment réordonner les niveau d'un facteur.
+- [DataCamp Exercise](https://campus.datacamp.com/courses/data-visualization-with-ggplot2-2/chapter-4-best-practices?ex=4#skiponboarding){target="_blank"}: Exercice simple sur comment faire des bar chart avec `ggplot2`.
+- [ggplot2 cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf){target="_blank"}: Toujours bon d'y jeter un oeil.
 
 
