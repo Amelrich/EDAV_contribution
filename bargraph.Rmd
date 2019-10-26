@@ -1,6 +1,6 @@
 # (PART) Categorical Variables {-}
 
-# Chart: Bar Chart {#bar}
+# Diagramme : Bar Chart {#bar}
 
 ![](images/banners/banner_bargraph.png)
 
