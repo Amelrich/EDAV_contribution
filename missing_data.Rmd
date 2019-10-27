@@ -212,4 +212,3 @@ Pour plus d'info, veuillez lire [ce blog sur DataScience+ sur la prédiction de 
 - [Imputing Missing Data in R; MICE package](https://datascienceplus.com/imputing-missing-data-with-r-mice-package/){target="_blank"} - A 9 min read on how to use the `mice` package to impute missing values in R
 - [How to Handle Missing Data](https://towardsdatascience.com/how-to-handle-missing-data-8646b18db0d4){target="_blank"} - A great blogpost on how to handle missing data.
 
-
