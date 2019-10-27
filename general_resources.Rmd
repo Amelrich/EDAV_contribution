@@ -1,38 +1,38 @@
-# General Resources {#general}
+# Ressources générales {#general}
 
 ![](images/banners/banner_resources.png)
 
-This is a long list of helpful general resources related to EDAV. If you have come across a good resource you don't see here, consider adding it with a pull request (see the [contribute page](contribute.html) for more info).
+Voici une longue liste de resources générales très utiles pour tout ce qui touche à l'exploration de données. Si vous trouvez une bonne ressource que vous ne voyez pas répertoriée ici, pensez à l'ajouter via une pulle request (voir notre [page de contribution](contribute.html) pour plus d'informations).
 
-## Books
+## Livres
 
-A lot of these are available for students through [Columbia Libraries](http://library.columbia.edu/){target="_blank"}, in both physical and e-book formats. 
+Beaucoup de ces livres sont disponibles pour les étudiants via [Columbia Libraries](http://library.columbia.edu/){target="_blank"}, en  
 
-- [Graphical Data Analysis with R](http://rosuda.org/GDA){target="_blank"}: This book systematically goes through the different types of data, including categorical variables, continuous variables, and time series. The author shows different examples of plotting techniques using ggplot and promoting the "grammar of graphics" model. Code snippets included and available at the [book's website](http://rosuda.org/GDA){target="_blank"}.
+- [Graphical Data Analysis with R](http://rosuda.org/GDA){target="_blank"}: Ce livre explique de façon systématique les différents types de données, y compris les variables catégorielles, continues et séries temporelles. L'auteur montre plusieurs exemples de techniques pour présenter les données comme ggplot et promeut le modèle "grammar of graphics". Les parties de code sont inclues et disponibles sur [le site du livre](http://rosuda.org/GDA){target="_blank"}.
 
-- [R for Data Science](http://r4ds.had.co.nz/){target="_blank"}: The classic. Everything from data types, programming, modeling, communicating, and those keyboard shortcuts you keep forgetting. To quote the book, "this book will teach you how to do data science with R." Nuff said.
+- [R for Data Science](http://r4ds.had.co.nz/){target="_blank"}: Le classique. Tout des types de données, programmation, modélisation, communication des résultats et ces raccourcis clavieres qu'on oublie tout le temps. Pour citer le livre, "Ce livre vous apprendra ) appliquer des data sciences avec R". Tout est dit.
 
 ## Cheatsheets
 
-- [Cheatsheet of cheatsheets](https://paulvanderlaken.com/author/lakenp/){target="_blank"}: Paul van der Laken has put together a large collection of R resource links, including cheat sheets, style guides, package info, blogs, and other helpful resources. 
+- [Cheatsheet of cheatsheets](https://paulvanderlaken.com/author/lakenp/){target="_blank"}: Paul van der Laken a répertorié une grande panoplie de ressources R, soit des cheatsheets, guides de style, informations sur des packages, blogs et autres ressources utiles. 
 
-- [RStudio Cheatsheet Collection](https://www.rstudio.com/resources/cheatsheets/){target="_blank"}: Collection of downloadable cheatsheets from RStudio. Includes ones on R Markdown, Data Transformation (`dplyr`), and Data Visualization (`ggplot2`). They also have a R Markdown Reference Guide, which is great for remembering that one chunk option that's on the tip of your tongue.
+- [RStudio Cheatsheet Collection](https://www.rstudio.com/resources/cheatsheets/){target="_blank"}: Un ensemble de cheatsheets qui peuvent être téléchargées de RStudio. Cela inclut celles sur R Markdown, transformation de données (`dplyr`) et visualisation de données (`ggplot2`). Ils ont aussi un guide de référence R Markdown, qui est génial pour se rappeler des chunks options qu'on a tendance à oublier.
 
-- [R Base Graphics Cheatsheet](https://github.com/jtr13/codehelp/blob/master/R/BaseGraphicsCheatsheet.pdf){target="_blank"}: Oddly enough, despite the length of time it's been around, it's hard to find a base graphics cheatsheet. Joyce put this one together to help you out if you're using base graphics.
+- [R Base Graphics Cheatsheet](https://github.com/jtr13/codehelp/blob/master/R/BaseGraphicsCheatsheet.pdf){target="_blank"}: De façon assez suprenante, malgré sa durée d'existence, il est difficile de trouver une cheatsheet pour base graphics. Joyce a créé celle-ci pour aider ceux qui utilise cet outil. 
 
 ## Articles
 
-- [Ten Simple Rules for Better Figures](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003833){target="_blank"}: A helpful article discussing how to make the best figures possible by following ten basic rules such as "Avoid 'chartjunk'" and "Know Your Audience". Good to keep these rules in mind.
+- [Ten Simple Rules for Better Figures](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003833){target="_blank"}: Un article utile qui explique comment faire les meilleurs graphiques en suivant des règles très simples comme "éviter le 'chartjunk'" et "connais ton audience". Il est bon de garder ces règles en tête. 
 
-- [The Simpsons by the Data](http://toddwschneider.com/posts/the-simpsons-by-the-data/){target="_blank"}: Nice example of telling a story with data (histograms, scatterplots, etc.). Also, it's subject is everybody's favorite TV family.
+- [The Simpsons by the Data](http://toddwschneider.com/posts/the-simpsons-by-the-data/){target="_blank"}: Un bon exemple pour raconter une histoire avec des données (histogrammes, scatterplots, etc.). De plus, son sujet est la série télé préférée de toutes les familles (pas tout à fait vrai quand tu es français, mais on respecte la version originale en anglais). 
 
 ## Meetups
 
-- [New York Open Statistical Programming Meetup](https://www.meetup.com/nyhackr/){target="_blank"}: Meetups hosted by [Jared Lander](https://www.jaredlander.com/about/){target="_blank"} and [Wes McKinney](http://wesmckinney.com/){target="_blank"} on a variety of topics in statistical programming, but with a focus on the R language. Past speakers have included [J.J. Allaire](https://en.wikipedia.org/wiki/Joseph_J._Allaire){target="_blank"} (founder of RStudio) and [Hadley Wickham](http://hadley.nz/){target="_blank"} (core tidyverse developer). Other attendees are generally eager to welcome newcomers and all of their talks are available on the [Lander Analytics Youtube channel](https://www.youtube.com/channel/UC2-hKemnrmVCH_29duyJ26A){target="_blank"}.
+- [New York Open Statistical Programming Meetup](https://www.meetup.com/nyhackr/){target="_blank"}: Les meetups organisés par [Jared Lander](https://www.jaredlander.com/about/){target="_blank"} et [Wes McKinney](http://wesmckinney.com/){target="_blank"} sur une variété de sujets en programmation statistique mais avec un focus sur R. Les speakers précédents étaient entre autres [J.J. Allaire](https://en.wikipedia.org/wiki/Joseph_J._Allaire){target="_blank"} (créateur de RStudio) et [Hadley Wickham](http://hadley.nz/){target="_blank"} (développeur principal de tidyverse). Les autres participants sont en génral très heureux d'accueillir de nouvelles personnes et toutes leurs séances sont disponibles sur [la chaîne Youtube Lander Analytics](https://www.youtube.com/channel/UC2-hKemnrmVCH_29duyJ26A){target="_blank"}.
 
 ## Twitter
 
-R likes Twitter. Here are some cool people doing work with [#rstats](https://twitter.com/search?q=%23rstats&src=typd){target="_blank"}:
+R aime Twitter. Voici quelques personnes très cools qui travaillent avec [#rstats](https://twitter.com/search?q=%23rstats&src=typd){target="_blank"}:
 
 - [Hadley Wickham](https://twitter.com/hadleywickham){target="_blank"}
 - [David Robinson](https://twitter.com/drob){target="_blank"}
@@ -40,7 +40,6 @@ R likes Twitter. Here are some cool people doing work with [#rstats](https://twi
 
 ## Data
 
-(Perhaps this should be a new chapter)
+(Peut-être que ceci devrait être un nouveau chapitre)
 
-Members of the United States Congress (1789-Present) with lots of biographical information https://github.com/unitedstates/congress-legislators
-
+Membres du Congrès aux Etats-Unis (1789-Présent) avec beaucoup d'informations biographiques: 
