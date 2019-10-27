@@ -2,13 +2,13 @@
 
 ![](images/banners/banner_iris.png)
 
-## Overview
+## Avant-propos
 
-This example goes through some work with the `iris` dataset to get to a finished scatterplot that is ready to present.
+Cet exemple s'intéresse au jeu de données `iris` et s'achève par la construction d'un scatterplot présentable.
 
 ### tl;dr
 
-Here's what we end up with:
+Voilà ce à quoi on doit aboutir :
 
 ```{r goal}
 library(ggplot2)
@@ -21,7 +21,7 @@ base_plot <- ggplot(data = iris, mapping = aes(x = Sepal.Length, y = Sepal.Width
 base_plot + theme_minimal()
 ```
 
-Wondering how we got there? Read on.
+Tu te demandes comment on est arrivé là ? Tu peux jeter un oeil à
 
 ### Packages 
 
@@ -33,6 +33,8 @@ Wondering how we got there? Read on.
 * [(`gridExtra`)](https://www.rdocumentation.org/packages/gridExtra){target="_blank"}
 
 ### Techniques
+
+On te les laisse en anglais par cohérence avec le cours et les recherches que tu pourras faire sur Google
 
 * Keyboard Shortcuts
 * Viewing Data Structure/Dimensions/etc.
@@ -46,30 +48,30 @@ Wondering how we got there? Read on.
 
 ***
 
-## Quick note on doing it the lazy way
+## Petite note sur comment le faire sans effort
 
-Shortcuts are your best friend to get work done faster. And they are easy to find.
+Les raccourcis sont tes meilleurs amis pour aller plus vite. Et en plus ils sont faciles à trouver.
 
-In the toolbar:
+Dans la barre principale :
 `Tools > Keyboard Shortcuts Help` OR `⌥⇧K`
 
-Some good ones:
+Quelques bons raccourcis :
 
-* Insert assignment operator (`<-`): Alt/Option+-
-* Insert pipe (`%>%`): Ctrl/Cmd+Shift+M
-* Comment Code:  Ctrl/Cmd+Shift+C
-* Run current line/selection: Ctrl/Cmd+Enter
-* Re-run previous region: Ctrl/Cmd+Shift+P
+* Insérer un opérateur d'assignation (`<-`): Alt/Option+-
+* Insérer un (`%>%`): Ctrl/Cmd+Shift+M
+* Mettre un commentaire :  Ctrl/Cmd+Shift+C
+* Lancer la ligne ou la sélection : Ctrl/Cmd+Enter
+* Relancer la cellule d'avant : Ctrl/Cmd+Shift+P
 
-Be on the lookout for things you do often and try to see if there is a faster way to do them.
+Restez attentif à chose que vous faites tout le temps et demander vous si vous ne pourriez pas le faire plus rapidement.
 
-Additionally, the RStudio IDE can be a little daunting, but it is full of useful tools that you can read about in [this cheatsheet](https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf){target="_blank"} or go through with this DataCamp course: [Part 1](https://www.datacamp.com/courses/working-with-the-rstudio-ide-part-1){target="_blank"}, [Part 2](https://www.datacamp.com/courses/working-with-the-rstudio-ide-part-2){target="_blank"}.
+En outre, l'IDE RStudio peut se montrer intimidant, mais il est rempli de petits outils que vous pourrez lire sur cette [cheatsheet](https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf){target="_blank"} ou bien sur un des cours de DataCamp : [Part 1](https://www.datacamp.com/courses/working-with-the-rstudio-ide-part-1){target="_blank"}, [Part 2](https://www.datacamp.com/courses/working-with-the-rstudio-ide-part-2){target="_blank"}.
 
-Okay, now let's get to it...
+Okay, maintenant on est parti...
 
 ***
 
-## Viewing data
+## Visualisation des données
 
 Let's start with loading the package so we can get the data as a dataframe.
 ```{r import_data}
