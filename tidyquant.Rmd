@@ -1,29 +1,29 @@
 # Stock data with tidyquant {#tidyquant}
 
 ![](images/banners/banner_tidyquant.png)
-*This chapter originated as a community contribution created by [	naotominakawa](https://github.com/naotominakawa){target="_blank"}*
+*Ce chapitre a pour origine une contribution communautaire créée par [	naotominakawa](https://github.com/naotominakawa){target="_blank"}*
 
-*This page is a work in progress. We appreciate any input you may have. If you would like to help improve this page, consider [contributing to our repo](contribute.html).*
+*Cette page est un travail en cours. Nous apprécions toute contribution que vous pourriez avoir. Si vous souhaitez aider à améliorer cette page, considérez [contributing to our repo](contribute.html).*
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Overview
-This section covers how to use the `tidyquant` package to conduct timeseries analysis.
+## Vue d'ensemble
+Cette section explique comment utiliser `tidyquant` package pour effectuer une analyse en timeseries.
 
-## What is tidyquant?
+## Qu'est ce que tidyquant?
 
-`tidyquant` is an one-stop shop for financial analysis. It is suitable for analyzing timeseries data, such as financial and economic data. `tidyquant` connects to various data sources such as Yahoo! Finance, Morning Star, Bloomberg market data, etc. It also behaves well with other `Tidyverse` packages.
+`tidyquant` est un guichet unique pour l'analyse financière. Il convient à l'analyse de données timeseries, telles que des données financières et économiques. `tidyquant` se connecte à diverses sources de données telles que Yahoo! Finance, Morning Star, données de marché Bloomberg, etc. Il se comporte également bien avec les autres `Tidyverse` packages.
 
 ## Installing tidyquant
-You can install **tidyquant** from CRAN:
+Vous pouvez installer **tidyquant** à partir de CRAN:
 
 ```
 install.packages("tidyquant")
 ```
 
-If you want to see which functions are available, you can run the following:
+Si vous voulez voir quels functions sont disponibles, vous pouvez exécuter les commandes suivantes:
 ```{r, eval = FALSE}
 # to see which functions are available (not run)
 library(tidyquant)
@@ -31,14 +31,14 @@ tq_transmute_fun_options()
 ```
 
 ## Single timeseries
-Obtain historical data for single stock (for example, Google):
+Obtenir des données historiques pour un stock unique (par exemple, Google):
 ```{r, message=FALSE}
 # get historical data for single stock. e.g. google
 library(tidyquant)
 tq_get("GOOGL", get="stock.prices")
 ```
 
-Calculate monthly return of single stock:
+Calculer le retour mensuel de stock unique:
 ```{r, message = FALSE}
 library(dplyr)
 # calculate monthly return of single stock
@@ -49,7 +49,7 @@ tq_get(c("GOOGL"), get="stock.prices") %>%
                col_rename = "monthly_return")
 ```
 
-Create a line chart of the *closing price* for single stock:
+Créer un line chart du *closing price* pour un stock unique:
 ```{r, message=FALSE}
 # showing closing price for single stock
 library(ggplot2)
@@ -58,7 +58,7 @@ tq_get(c("GOOGL"), get="stock.prices") %>%
   geom_line()
 ```
 
-Create a line chart of the *monthly return* for single stock:
+Créer un line chart du *monthly return* pour un stock unique:
 ```{r}
 # showing monthly return for single stock
 tq_get(c("GOOGL"), get="stock.prices") %>%
@@ -71,13 +71,13 @@ tq_get(c("GOOGL"), get="stock.prices") %>%
 ```
 
 ## Multiple timeseries
-Obtain historical data for multiple stocks (for example, GAFA):
+Obtenir des données historiques pour plusieurs actions (par exemple, GAFA):
 ```{r}
 # get historical data for multiple stocks. e.g. GAFA
 tq_get(c("GOOGL","AMZN","FB","AAPL"), get="stock.prices")
 ```
 
-Create a multiple line chart of the closing prices of multiple stocks (again, GAFA). We can show each stock in a different color on the same graph:
+Créez un multiple line chart des cours de clôture de plusieurs actions (à nouveau, GAFA). Nous pouvons afficher chaque action dans une couleur différente sur le même graphique:
 ```{r}
 # Create a multiple line chart of the closing prices of the four stocks,
 # showing each stock in a different color on the same graph.
@@ -86,7 +86,7 @@ tq_get(c("GOOGL","AMZN","FB","AAPL"), get="stock.prices") %>%
   geom_line()
 ```
 
-Transform the data so each stock begins at 100 and replot (Standardize the data so that we can compare timeseries):
+Transformer les données pour que chaque stock commence à 100 et replacer (Standardize les données pour pouvoir comparer timeseries):
 ```{r}
 # Create a multiple line chart of the closing prices of the four stocks,
 # showing each stock in a different color on the same graph.
@@ -98,7 +98,7 @@ tq_get(c("GOOGL","AMZN","FB","AAPL"), get="stock.prices") %>%
   geom_line()
 ```
 
-Calculate *monthly return* of multiple stocks (again, GAFA):
+Calculez *monthly return* de plusieurs actions (encore une fois, GAFA):
 ```{r}
 # calculate monthly return of multiple stocks
 tq_get(c("GOOGL","AMZN","FB","AAPL"), get="stock.prices") %>%
@@ -109,7 +109,7 @@ tq_get(c("GOOGL","AMZN","FB","AAPL"), get="stock.prices") %>%
                col_rename = "monthly_return")
 ```
 
-Create a multiple line chart of monthly return of the four stocks. Again, we can show each stock in a different color on the same graph:
+Créez un multiple line chart de rendement mensuel des quatre actions. De nouveau, nous pouvons afficher chaque action dans une couleur différente sur le même graphique:
 ```{r}
 # Create a multiple line chart of monthly return of the four stocks,
 # showing each stock in a different color on the same graph
@@ -123,6 +123,6 @@ tq_get(c("GOOGL","AMZN","FB","AAPL"), get="stock.prices") %>%
   geom_line()
 ```
 
-## External Resources
+## Ressources Externes
 - [tidyquant CRAN doc](https://cran.r-project.org/web/packages/tidyquant/vignettes/TQ00-introduction-to-tidyquant.html){target="_blank"}: formal documentation on the package
 - [tidyquant Github repo](https://github.com/business-science/tidyquant){target="_blank"}: Github repository for the `tidyquant` package with a great README
