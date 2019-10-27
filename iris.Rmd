@@ -326,6 +326,3 @@ Nous n'avons que toucher la surface de ggplot et toucher du doigt la grammaire d
 
 
 
-
-
-
