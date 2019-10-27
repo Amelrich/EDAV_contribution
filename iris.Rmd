@@ -73,21 +73,21 @@ Okay, maintenant on est parti...
 
 ## Visualisation des données
 
-Let's start with loading the package so we can get the data as a dataframe.
+Commençons par charger le package, ainsi on pourra récupérer les données dans un dataframe.
 ```{r import_data}
 library(datasets)
 
 class(iris)
 ```
 
-This is not a huge dataset, but it is helpful to get into the habit of treating datasets as large no matter what. Because of this, make sure you inspect the size and structure of your dataset before going and printing it to the console. 
+Ce n'est pas un très grand jeu de données, mais c'est utile de prendre l'habitude de considérer un jeu de données comme lourd quoi qu'il arrive. Par conséquent avant d'afficher le jeu de données dans le terminal soyez certain d'avoir regarder la taille et la structure de données de votre jeu de données. 
 
-Here we can see that we have 150 observations across 5 different variables.
+Ici on peut voir qu'on a 150 observations sur 5 variables différentes.
 ```{r dim_view}
 dim(iris)
 ```
 
-There are a bunch of ways to get information on your dataset. Here are a few:
+Il y a plein de façon d'avoir les infos sur votre jeu de données, en voici quelques uns :
 ```{r other_views, message=FALSE}
 str(iris)
 
@@ -98,41 +98,41 @@ library(dplyr)
 glimpse(iris)
 ```
 
-Plotting the data by calling `iris` to the console will print the whole thing. Go ahead and try it in this case, but this is not recommended for larger datasets. Instead, use `head()` in the console or `View()`.
+Afficher les données en appelant `iris` dans le terminal affichera la totalité. Allez-y dans ce cas précis vous pouvez essayer, mais ce n'est pas recommendé pour les jeux de données plus large. Au contraire vous pouvez utiliser `head()` ou bien `View()` dans le terminal.
 
-If you want to learn more about these commands, or anything for that matter, just type `?<command>` into the console. `?head`, for example, will reveal that there is an additional argument to `head` called `n` for the number of lines printed, which defaults to 6. Also, you may notice there is something called `tail`. I wonder what that does? <i class="far fa-smile"></i>
+Si vous souhaitez en apprendre plus sur une commande, tapez juste `?<command>` dans le terminal. Par exemple `?head` vous apprendra que la fonction `head` dispose d'un argument supplémentaire `n` pour le nombre de lignes que vous souhaitez afficher (par défaut égal à 6). Aussi remarquerez vous peut-être qu'il y a quelque chose appelé `tail`. Je me demande à quoi ça sert ! <i class="far fa-smile"></i>
 
-## Plotting data
+## Afficher les données
 
-Let's plot something!
+Affichons quelque chose !
 ```{r blank_plot}
 # Something's missing
 library(ggplot2)
 ggplot(iris)
 ```
 
-Where is it? Maybe if we add some aesthetics. I remember that was an important word that came up somewhere:
+Où est-ce que c'est ? Peut-être que si nous ajoutons quelques aesthetics... Je me rappelle avoir entendu ce mot important quelque part :
 ```{r blank_plot_aes}
 # Still not working...
 ggplot(data = iris, mapping = aes(x = Sepal.Length, y = Sepal.Width))
 ```
 
-Still nothing. Remember, you have to add a `geom` for something to show up.
+Toujours rien. Rappelez-vous que qu'il faut ajouter une `geom` pour afficher quelque chose.
 ```{r first_ggplot}
 # There we go!
 ggplot(data = iris, mapping = aes(x = Sepal.Length, y = Sepal.Width)) +
   geom_point()
 ```
 
-Yay! Something showed up! Notice where we put the `data`, inside of `ggplot()`. ggplot is built on layers. Here we put it in the main call to `ggplot`. The `data` argument is also available in `geom_point()`, but in that case it would only apply to that layer. Here, we are saying, for all layers, unless specified, make the `data` be `iris`.
+Houra ! Quelque chose s'est affiché ! Faites attention à où nous avons mis les données, à l'intérieur de `ggplot()`. ggplot est composé de couches et ici nous avons mis les données dans la fonction principale de `ggplot`. L'argument `data` est aussi disponible dans `geom_point()`, mais cela ne s'appliquera qu'à cette couche précise. Ici nous avons fixé que sans précisions supplémentaire l'argument `data` sera `iris`.
 
-Now let's add a color mapping by `Species`:
+Maintenant ajoutons un peu de couleur par `Species` :
 ```{r ggplot_colored}
 ggplot(data = iris, mapping = aes(x = Sepal.Length, y = Sepal.Width)) +
   geom_point(aes(color = Species))
 ```
 
-Usually it is helpful to store the main portion of the plot in a variable and add on the layers. The code below achieves the same output as above:
+Générallement c'est utile de stocker la majeure partie du graphique dans une variable et ensuite d'y ajouter des couches. Le code ci-dessous réalise le même travail qu'au dessus :
 ```{r ggplot_color_and_variables, eval = FALSE}
 sepal_plot <- ggplot(data = iris, mapping = aes(x = Sepal.Length, y = Sepal.Width))
 
@@ -142,22 +142,22 @@ sepal_plot +
 
 ## Markdown etiquette
 
-I'm seeing that my R Markdown file is getting a little messy. Working with markdown and chunks can get out of hand, but there are some helpful tricks. First, consider naming your chunks as you go. If you combine this with headers, your work will be much more organized. Specifically, the little line at the bottom of the editor becomes much more useful.
+Je remarque que mon fichier R Markdown est un peu en bazar. On peut rapidement perdre le controle d'un fichier Rmd mais ils y a quelques astuces pour ça. La première chose, donnez des noms à vos chunks. Si en plus vous combinez ça avec des entêtes le travaille sera mieux organisé. Plus particulièrement la petite ligne en bas de l'éditeur à toute son utilité.
 
-From this:
+De ça :
 ![Pic](images/03-iris-jumpbar.png)
 
-To this:
+A ça :
 ![Pic](images/03-iris-jumpbar-formatted.png)
 
-Just add a name to the start of each chunk:
+Ajoutez un nom au début de chaque chunk :
 `{r <cool-code-chunk-name>, <chunk_option> = TRUE}`
 
-Now you can see what the chunks were about as well as get a sense of where you are in the document. Just don't forget, it is a space after the `r` and commas for the other chunk options you may have like `eval` or `echo`. For more info, see [our section on communicating results](basics.html#communicating-results).
+Maintenant on est capable de savoir de quoi parle la chunk et où on en est dans le document. N'oubliez pas, il faut un espace après le `r` et une virgule entre chaque option telle que `eval` ou `echo`. Pour plus d'info voir [notre section pour communique des résultats](basics.html#communicating-results).
 
-## Overlapping data
+## Chevauchement de données
 
-Eagle-eyed viewers may notice that we seem to be a few points short. We should be seeing 150 points, but we only see 117 (yes, I counted). Where are those 33 missing points? They are actually hiding behind other points. This dataset rounds to the nearest tenth of a centimeter, which is what is giving us those regular placings of the points. How did I know the data was in centimeters? Running `?iris` in the console of course! [Ah, you ask a silly question, you get a silly answer](https://youtu.be/UIKGV2cTgqA?t=3m10s){target="_blank"}.
+Ceux qui ont un compas dans l'oeil auront remarqué mais quelques points ont disparus. On devrait avoir 150 points, pour autant on en voit que 117 (oui oui je les ai compté). Où sont passés les 33 points manquants ? En fait, ils sont cachés derrières d'autres points. Le jeu de données arrondi au dixième de centimètre prêt ce qui nous donne ce placement des points si régulier. Comment je sais que c'est en centimètres ? J'ai fait `?iris` dans le terminal mon cher Watson ! [Ah, question bête, réponse bête](https://youtu.be/UIKGV2cTgqA?t=3m10s){target="_blank"}.
 
 ```{r overlapping_data_repeated}
 # This plot hides some of the points
@@ -165,47 +165,47 @@ ggplot(data = iris, mapping = aes(x = Sepal.Length, y = Sepal.Width)) +
   geom_point(aes(color = Species))
 ```
 
-What's the culprit? The `color` aesthetic. The color by default is opaque and will hide any points that are behind it. As a rule, it is always beneficial to reduce the opacity a little no matter what to avoid this problem. To do this, change the `alpha` value to something other than it's default `1`, like `0.5`. 
+Qui est le coupable ? L'aesthetic `color`. La couleur par défaut est opaque et cachera tous les points qui sont derrière. En règle générale c'est toujours bénéfique de réduire l'opacité un petit peu pour éviter ce problème. Pour faire ça changer la valeur de `alpha` pour quelque chose différent de `1`, par exemple `0.5`. 
 
 ```{r overlap_alpha}
 ggplot(data = iris, mapping = aes(x = Sepal.Length, y = Sepal.Width)) + 
   geom_point(aes(color = Species, alpha = 0.5))
 ```
 
-Okay...a couple things with this. 
+Okay... Plusieurs choses.
 
-### First: the legend
+### Premièrement : la légende
 
-**First**, did you notice the new addition to the legend? That looks silly! Why did that show up? Well, when we added the `alpha` into `aes()`, we got a new legend. Let's look at what we are doing with `geom_point()`. Specifically, this is saying how we should map the `color` and `alpha`:
+**Premièrement**, avez-vous remarqué l'ajout soudain de la légende ? C'est idiot ! Pourquoi c'est apparu comme ça ? En fait, lorsqu'on a ajouté `alpha` dans `aes()` cela a généré une légende. Regardons plus en détail `geom_point()`. Plus particulièrement cela nous montre où on doit préciser `color` et `alpha` :
 
 `geom_point(mapping = aes(color = Species, alpha = 0.5))`
 
-So, we are mapping these given *aesthetics*, `color` and `alpha`, to certain values. `ggplot` knows that usually the aesthetic mapping will vary since you are probably passing in data that varies, so it will create a legend for each mapping. However, we don't need a legend for the `alpha`: we explicitly set it to be 0.5. To fix this, we can pull `alpha` out of `aes` and instead treat it like an *attribute*:
+Donc on associe ces *aesthtics* `color` and `alpha`, à certains valeurs. `ggplot` sait que généralement cette association va varier étant donné que vous êtes en train de travailler sur des données qui elles-mêmes varient. C'est pourquoi il va créer une légende pour chaque association. Néanmoins pour le `alpha` on a pas besoin de légende on l'a fixé à 0.5. Si on veut changer ça, il suffit de mettre `alpha` à l'exterieur de l'`aes` et le traiter comme un *argument* :
 
 ```{r overlap_alpha_fix1}
 ggplot(data = iris, mapping = aes(x = Sepal.Length, y = Sepal.Width)) + 
   geom_point(aes(color = Species), alpha = 0.5)
 ```
 
-No more legend. So, in ggplot, there is a difference between where an aesthetic is placed. It is also called MAPPING an aesthetic (making it vary with data inside `aes`) or SETTING an aesthetic (make it a constant attribute across all datapoints outside of `aes`).
+Plus de légende. Donc sur ggplot on obtient pas le même résultat suivant où est placé l'aesthetic. C'est ce qu'on appelle le MAPPING d'aesthetic (faire varier avec des données à l'intérieur de `aes`) ou le SETTING d'aesthetic (le rendre constant sur tous les points en plaçant le paramètre à l'éxterieur de `aes`).
 
-### Second: jittering
+### Deuxièment : le jittering
 
-**Secondly**, did this alpha trick *really* help us? Are we able to see anything in the plot in an easier way? Not really. Since the points perfectly overlap, the opacity difference doesn't help us much. Usually, opacity will work, but here the data is so regular that we don't gain anything in the perception department.
+**Deuxièment**, est-ce que l'astuce du alpha nous a *vraiment* aidé ? Est-ce qu'on est capable de véritablement voir les choses plus facilement ? Pas vraiment... Comme les points se chevauche parfaitement, l'opacité ne nous aide pas tant que ça. Habituellement l'opacité marche mais ici les données sont si régulières que ça n'améliore pas leur perception.
 
-We can fix this by introducing some *jitter* to the datapoints. Jitter adds a little random noise and moves the datapoints so that they don't fully overlap:
+On peut régler ça en ajoutant du *jitter* au points. Le *Jitter* ajoute un bruit aléatoire aux points et les bougent de sorte qu'ils ne se chevauchent plus entièrement :
 ```{r overlap-jitter-fix1}
 ggplot(data = iris, mapping = aes(x = Sepal.Length, y = Sepal.Width)) + 
   geom_point(aes(color = Species), alpha = 0.5, position = "jitter")
 ```
 
-Consider your motives when using jittering. You are by definition altering the data, but it may be beneficial in some situations.
+Utilisez le jittering avec modération et n'oubliez pas que vous altérer les données. Néanmoins dans certaines situations c'est très utile.
 
 ***
 
-### *Aside*: example where alpha blending works
+### *Parenthèse* : Exemple de cas où le alpha blending est utile
 
-We are dealing with a case where jittering works best to see the data, while changing the `alpha` doesn't help us much. Here's a quick example where opacity using `alpha` might be more directly helpful.
+Nous avons vu un cas où le jittering marchait très bien, alors que le alpha ne nous aidait pas plus que ça. Voyons maintenant un exemple où l'opacité et le changement du alpha sera directement utile.
 ```{r opacity-useful-aside, message=FALSE}
 # lib for arranging plots side by side
 library(gridExtra)
@@ -228,13 +228,13 @@ gridExtra::grid.arrange(plt1, plt2,
                         ncol = 2, nrow = 1)
 ```
 
-Here it is much easier to see where the dataset is concentrated.
+Ici, c'est plus simple de voir que le jeu de données est très concentré.
 
 ***
 
-## Formatting for presentation
+## Remanier pour présenter
 
-Let's say we have finished this plot and we are ready to present it to other people:
+Disons que nous avons fini notre graphique et que nous sommes prêt à le présenter à d'autres gens :
 ```{r present-plot, echo = FALSE}
 ggplot(data = iris, mapping = aes(x = Sepal.Length, y = Sepal.Width)) + 
   geom_point(aes(color = Species), alpha = 0.5, position = "jitter")
@@ -242,9 +242,9 @@ ggplot(data = iris, mapping = aes(x = Sepal.Length, y = Sepal.Width)) +
 
 We should clean it up a bit so it can stand on its own. 
 
-## Alter appearance
+## Modifier l'apparence
 
-First, let's make the `x`/`y` labels a little cleaner and more descriptive:
+Premièrement, rendons les noms des axes `x`/`y` plus clairs et descriptifs :
 ```{r clean-xy-labels}
 ggplot(data = iris, mapping = aes(x = Sepal.Length, y = Sepal.Width)) + 
   geom_point(aes(color = Species), alpha = 0.5, position = "jitter") +
@@ -252,7 +252,7 @@ ggplot(data = iris, mapping = aes(x = Sepal.Length, y = Sepal.Width)) +
   ylab("Sepal Width (cm)")
 ```
 
-Next, add a title that encapsulates the plot:
+Ensuite, mettons un titre :
 ```{r title_added}
 ggplot(data = iris, mapping = aes(x = Sepal.Length, y = Sepal.Width)) + 
   geom_point(aes(color = Species), alpha = 0.5, position = "jitter") +
@@ -261,7 +261,7 @@ ggplot(data = iris, mapping = aes(x = Sepal.Length, y = Sepal.Width)) +
   ggtitle("Sepal Dimensions in Different Species of Iris Flowers")
 ```
 
-And make the points a little bigger:
+Et grossissons les point :
 ```{r size_fixed}
 ggplot(data = iris, mapping = aes(x = Sepal.Length, y = Sepal.Width)) + 
   geom_point(aes(color = Species), size = 3, alpha = 0.5, position = "jitter") +
@@ -270,11 +270,12 @@ ggplot(data = iris, mapping = aes(x = Sepal.Length, y = Sepal.Width)) +
   ggtitle("Sepal Dimensions in Different Species of Iris Flowers")
 ```
 
-Now it's looking presentable.
+Maintenant c'est présentable !
 
-## Consider themes
+## Ajouter des themes
 
-It may be better for your situation to change the theme of the plot (the background, axes, etc.; the "accessories" of the plot). Explore what different themes can offer and pick one that is right for you.
+Il sera dans certaine situation mieux de changer les theme de votre graphique (l'arrière-plan, les axes, "accessories" etc.). Jetez un oeil aux différents thèmes qui existent et choisissez en un qui vous plait.
+
 ```{r themes}
 base_plot <- ggplot(data = iris, mapping = aes(x = Sepal.Length, y = Sepal.Width)) + 
   geom_point(aes(color = Species), size = 3, alpha = 0.5, position = "jitter") +
@@ -293,11 +294,11 @@ base_plot + theme_classic()
 base_plot + theme_void()
 ```
 
-I'm going to go with `theme_minimal()` this time. 
+Cette fois je vais utilisé `theme_minimal()`. 
 
 ***
 
-So here we are! We got a lovely scatterplot ready to show the world!
+Nous y voilà ! Nous avons un scatterplot prêt à conquérir le monde !
 
 ```{r final-result, echo = FALSE}
 base_plot <- ggplot(data = iris, mapping = aes(x = Sepal.Length, y = Sepal.Width)) + 
@@ -309,11 +310,11 @@ base_plot <- ggplot(data = iris, mapping = aes(x = Sepal.Length, y = Sepal.Width
 base_plot + theme_minimal()
 ```
 
-## Going deeper
+## Pour aller plus loin
 
-We have just touched the surface of ggplot and dipped our toes into grammar of graphics. If you want to go deeper, I highly recommend the DataCamp courses on *Data Visualization with ggplot2* with Rick Scavetta. There are three parts and they are quite dense, but the [first part](https://www.datacamp.com/courses/data-visualization-with-ggplot2-1){target="_blank"} is definitely worth checking out. 
+Nous n'avons que toucher la surface de ggplot et toucher du doigt la grammaire des graphiques. Si vous souhaitez aller plus loin, je vous recommende hautement les cours de DataCamp *Data Visualization with ggplot2* de Rick Scavetta. Ce cours est en 3 parties très denses, mais la [première partie](https://www.datacamp.com/courses/data-visualization-with-ggplot2-1){target="_blank"} vaut vraiment le détour. 
 
-## Helpful links
+## Liens utiles
 
 [RStudio ggplot2 Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf){target="_blank"}
 
