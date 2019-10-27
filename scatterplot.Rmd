@@ -1,18 +1,18 @@
 # (PART) Multivariate Continuous {-}
 
-# Chart: Scatterplot {#scatter}
+# Diagramme : Scatterplot {#scatter}
 
 ![](images/banners/banner_scatterplot.png)
 
-## Overview
+## Avant-propos
 
-This section covers how to make scatterplots
+Cette section présente comment construire un scatterplot (nuage de points en français).
 
 ## tl;dr
-Fancy Example NOW! Gimme Gimme GIMME!
+Un exemple cool MAINTENANT! Je veux, je veux, JE VEUX !
 
 <!-- Explanation: -->
-Here's a look at the relationship between brain weight vs. body weight for 62 species of land mammals:
+On s'interesse ici à la relation entre le poids du cerveau et le poids du corps de 62 espèces de mamifères terrestres :
 
 ```{r tldr-show-plot, echo=FALSE, warning=FALSE, fig.height=6, fig.width=9}
 library(MASS) # data
@@ -55,7 +55,7 @@ ggplot(mammals, aes(x = body, y = brain)) +
   theme(legend.position = c(0.832, 0.21))
 ```
 
-And here's the code:
+Voici le code :
 ```{r tldr-code, eval=FALSE}
 library(MASS) # data
 library(ggplot2) # plotting
@@ -96,23 +96,23 @@ ggplot(mammals, aes(x = body, y = brain)) +
   theme(legend.position = c(0.832, 0.21))
 ```
 
-For more info on this dataset, type `?MASS::mammals` into the console. 
+Pour plus d'info sur le jeu de données, tapez `?MASS::mammals` dans le terminal. 
 
-And if you are going crazy not knowing what species is in the top right corner, it's another elephant. Specifically, it's the African elephant. It also never forgets how big a brain it has. <i class="far fa-smile-beam"></i>
+Et si ça vous rend fou de ne pas savoir quelle espèce est dans le coin en haut à droite, c'est une autre éléphant. Plus précisement c'est un éléphant africain. Il n'oublie jamais à quel point son cerveau est grand. <i class="far fa-smile-beam"></i>
 
-## Simple examples
+## Exemples simples
 <!-- Simplify Note -->
-That was *too* fancy! Much simpler please!
+C'était *trop* sophistiqué ! Plus simple svp !
  
 <!-- Simple Explanation of Data: -->
-Let's use the `SpeedSki` dataset from `GDAdata` to look at how the speed achieved by the participants related to their birth year:
+Utilisons le jeu de données `SpeedSki` du package `GDAdata` pour regarder comment la vitesse atteinte par les participants est reliée à leur année de naissance :
 ```{r simple-example-data}
 library(GDAdata)
 
 head(SpeedSki, n = 7)
 ```
 
-### Scatterplot using base R
+### Scatterplot de base en R
 ```{r base-r}
 x <- SpeedSki$Year
 y <- SpeedSki$Speed
@@ -121,9 +121,9 @@ plot(x, y, main = "Scatterplot of Speed vs. Birth Year")
 ```
 
 <!-- Base R Plot Explanation -->
-Base R scatterplots are easy to make. All you need are the two variables you want to plot. Although scatterplots can be made with categorical data, the variables you are plotting will usually be continuous.
+Les scatterpolts de base en R sont faciles à faire. Tout ce dont vous avez besoin c'est deux variables que vous vouler représenter. Bien que les scatterplots sont faisables avec des données catégorielles, les variables avec lesquelles vous travaillerez dans ce cadre seront générallement continues.
 
-### Scatterplot using ggplot2
+### Scatterplot avec ggplot2
 ```{r ggplot}
 library(GDAdata) # data
 library(ggplot2) # plotting
@@ -139,29 +139,29 @@ scatter +
 ```
 
 <!-- ggplot2 explanation -->
-`ggplot2` makes it very easy to create scatterplots. Using `geom_point()`, you can easily plot two different aesthetics in one graph. It also is simple to add on extra formatting to make your plots look nice (All that is really necessary is the data, the aesthetics, and the geom).
+`ggplot2` permets de créer facilement des scatterplots. En utilisant `geom_point()`,  vous pouvez aisément afficher deux types différents d'aesthetic en un graphique. C'est aussi très simple de les personnaliser pour les rendre plus jolis (tout ce qui est vraiment nécessaire c'est les données, l'aesthetic et la geom).
 
-## Theory
+## Théorie
 
-Scatterplots are very useful in understanding the correlation (or lack thereof) between variables.  For example, in [section 13.2](scatter.html#tldr-7) notice the positive relationship between brain and body weight in species of land mammals. The scatterplot gives a good idea of whether that relationship is positive or negative and if there's a correlation.  However, don't mistake correlation in a scatterplot for causation! 
+Les scatterplots sont vraiment utiles pour comprendre les correlations (ou pas) entre des variables. Par exemple dans la [section 13.2](scatter.html#tldr-7) vous pourrez remarquer la correlation positive entre le poids du cerveau et le poids du corps des differentes espèces de mammifères terrestres. Le scatterplot donne généralement une bonne idée pour savoir si un corrélation est positive ou négative (si tant est qu'elle existe). Néanmoins il ne faut pas confondre corrélation et causalité dans un scatterplot !
 
-Below we show variations on the scatterplot which can be used to enhance interpretability.
+Ci-dessous, différentes variations sur les scatterplots qui peuvent être utilisé pour améliorer l'interpretabilité.
 
 <!-- *Link to textbook -->
-*   For more info about adding lines/contours, comparing groups, and plotting continuous variables check out [Chapter 5](http://www.gradaanwr.net/content/ch05/){target="_blank"} of the textbook.
+*   Pour plus d'info sur comment ajouter des lignes, contours, comparer des grouper et afficher des variables continues regarder [Chapter 5](http://www.gradaanwr.net/content/ch05/){target="_blank"} du livre.
 
-## When to use
+## Quand utiliser ?
 <!-- Quick Note on When to use this plot -->
-Scatterplots are great for exploring relationships between variables. Basically, if you are interested in how variables relate to each other, the scatterplot is a great place to start.
+Les scatterplots sont bien pour étudier les liens entre les différentes variables. Fondamentalement, si vous vous interessez au lien qui unissent différentes variables, les scatterplots sont un bon point de départ.
 
-## Considerations
+## Considérations
 
 <!-- *   List of things to pay attention to with examples -->
-### Overlapping data
-Data with similar values will overlap in a scatterplot and may lead to problems. Consider exploring [alpha blending](iris.html#aside-example-where-alpha-blending-works) or [jittering](iris.html#second-jittering) as remedies (links from [Overlapping Data](iris.html#overlapping-data) section of [Iris Walkthrough](iris.html)).
+### Chevauchement des données.
+Les données avec des valeurs similaires vont se chevaucher dans un scatterplot et cela peut conduire à des problèmes. Vous pourrez pour cela au choix essayer le [alpha blending](iris.html#aside-example-where-alpha-blending-works) ou le [jittering](iris.html#second-jittering) (liens vers le [chevauchement](iris.html#overlapping-data) de la section sur [Iris Walkthrough](iris.html)).
 
-### Scaling
-Consider how scaling can modify how your data will be perceived:
+### Changement d'échelle
+N'oubliez pas que le changement d'échelle peut modifier la perception des données :
 ```{r scaling-fix}
 library(ggplot2)
 num_points <- 100
@@ -183,31 +183,31 @@ ggplot(df, aes(wide_x, wide_y)) +
 
 ## Modifications
 
-### Contour lines
+### Lignes de contours
 <!-- blurb -->
-Contour lines give a sense of the density of the data at a glance.
+Les lignes de contour donnent en un regard une compréhension de la densité..
 
-For these contour maps, we will use the `SpeedSki` dataset.
+Pour ces contour maps, on va utiliser le jeu de données `SpeedSki`.
 
-Contour lines can be added to the plot call using `geom_density_2d()`:
+Les lignes de contour peuvent être afficher en utilisant `geom_density_2d()`:
 ```{r}
 ggplot(SpeedSki, aes(Year, Speed)) + 
   geom_density_2d() 
 ```
 
-Contour lines work best when combined with other layers:
+Les lignes de contour marchent d'autant mieux lorsqu'elles sont combinées aux autres couches :
 ```{r}
 ggplot(SpeedSki, aes(Year, Speed)) + 
   geom_point() + 
   geom_density_2d(bins = 5)
 ```
 
-### Scatterplot matrices
-If you want to compare multiple parameters to each other, consider using a scatterplot matrix. This will allow you to show many comparisons in a compact and efficient manner.
+### Matrices de scatterplot
+Si vous souhaitez comparer de multiples paramètres les uns par rapport aux autres vous pourrez untiliser une matrice de scatterplots. Cela vous permettra de mettre en exergue de multiples comparaisons de façon compact et efficaces.
 
-For these scatterplot matrices, we will use the `movies` dataset from the `ggplot2movies` package.
+Pour ces matrices de scatterplot, on va utiliser le jeu de données `movies` du package `ggplot2movies`.
 
-As a default, the base R `plot()` function will create a scatterplot matrix when given multiple variables:
+Par défaut la fonction R de base `plot()` crée une matrice de scatterplots lorsque de multiples variables sont données en entrée :
 ```{r message=FALSE, fig.width=7, fig.height=7}
 library(ggplot2movies) # data
 library(dplyr) # manipulation
@@ -221,22 +221,22 @@ splomvar <- moviedf %>%
 plot(splomvar)
 ```
 
-While this is quite useful for personal exploration of a datset, it is **not** recommended for presentation purposes. Something called the [Hermann grid illusion](https://en.wikipedia.org/wiki/Grid_illusion){target="_blank"} makes this plot very difficult to examine.
+Bien que cela peut être très utile lors d'une exploration personnelle des données, ce n'est **pas** recommender pour une présentation. L'[Hermann grid illusion](https://en.wikipedia.org/wiki/Grid_illusion){target="_blank"} rend ces graphiques très durs à examiner.
 
-To remove this problem, consider using the `splom()` function from the `lattice` package:
+Pour palier ce problème, utilisez la fonction `splom()` du package `lattice` :
 ```{r, fig.width=7, fig.height=7}
 library(lattice) #sploms
 
 splom(splomvar)
 ```
 
-## External resources
+## Ressources externes
 <!-- - []](){target="_blank"}: Links to resources with quick blurb -->
-- [Quick-R article](https://www.statmethods.net/graphs/scatterplot.html){target="_blank"} about scatterplots using Base R. Goes from the simple into the very fancy, with Matrices, High Density, and 3D versions. 
-- [STHDA Base R](http://www.sthda.com/english/wiki/scatter-plots-r-base-graphs){target="_blank"}: article on scatterplots in Base R. More examples of how to enhance the humble graph.
-- [STHDA ggplot2](http://www.sthda.com/english/wiki/ggplot2-scatterplot-easy-scatter-plot-using-ggplot2-and-r-statistical-software){target="_blank"}: article on scatterplots in `ggplot2`. Heavy on the formatting options available and facet warps.
-- [Stack Overflow](https://stackoverflow.com/questions/15624656/label-points-in-geom-point){target="_blank"} on adding labels to points from `geom_point()`
-- [ggplot2 cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf){target="_blank"}: Always good to have close by.
+- [Quick-R article](https://www.statmethods.net/graphs/scatterplot.html){target="_blank"} sur les scatterplots de base en R. Du simple au plus sophistiqué avec notamment des matruces, de la haut densité et des versions 3D
+- [STHDA Base R](http://www.sthda.com/english/wiki/scatter-plots-r-base-graphs){target="_blank"}: article sur les scatterplots de base en R. Plus d'exmple pour améliorer un graphe.
+- [STHDA ggplot2](http://www.sthda.com/english/wiki/ggplot2-scatterplot-easy-scatter-plot-using-ggplot2-and-r-statistical-software){target="_blank"}: articles sur les scatterplots via `ggplot2`. Très bon pour le formattage et les options dispoinibles pour le facetting.
+- [Stack Overflow](https://stackoverflow.com/questions/15624656/label-points-in-geom-point){target="_blank"} sur comment labeliser des points avec `geom_point()`
+- [ggplot2 cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf){target="_blank"}: Toujours bon d'y jeter un oeil.
 
 
 
