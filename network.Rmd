@@ -6,18 +6,18 @@
 
 ## visNetwork (interactive)
 
-`visNetwork` is a powerful R implementation of the interactive JavaScript `vis.js` library; it uses `tidyverse` piping: [VisNetwork Docs](https://datastorm-open.github.io/visNetwork/){target="_blank"}.
+`visNetwork` est un puissant R implémentation du graphe intéractif JavaScript `vis.js` library; il utilise `tidyverse` piping: [VisNetwork Docs](https://datastorm-open.github.io/visNetwork/){target="_blank"}.
 
---> The Vignette has clear worked-out examples: https://cran.r-project.org/web/packages/visNetwork/vignettes/Introduction-to-visNetwork.html
+--> Le Vignette a des exemples clairement élaborés: https://cran.r-project.org/web/packages/visNetwork/vignettes/Introduction-to-visNetwork.html
 
 
-The `visNetwork` documentation doesn't provide the same level of explanation as the original, so it's worth checking out the `vis.js` documentation as well:
-http://visjs.org/index.html  In particular, the [interactive examples](http://visjs.org/network_examples.html){target="_blank"} are particularly useful for trying out different options. For example, you can test out physics options with this [network configurator](http://visjs.org/examples/network/physics/physicsConfiguration.html){target="_blank"}. 
+Le `visNetwork` documentation ne fournit pas le même niveau d’explication que l’original, il est donc intéressant de consulter le `vis.js` documentation ainsi que:
+http://visjs.org/index.html  En particulier, le [interactive examples](http://visjs.org/network_examples.html){target="_blank"} sont particulièrement utiles pour essayer différentes options. Par exemple, vous pouvez tester des options de physique avec cette [network configurator](http://visjs.org/examples/network/physics/physicsConfiguration.html){target="_blank"}. 
 
 
 ### Minimum working example
 
-Create a [node data frame](https://datastorm-open.github.io/visNetwork/nodes.html){target="_blank"} with a minimum one of column (must be called `id`) with node names:
+Créer un [node data frame](https://datastorm-open.github.io/visNetwork/nodes.html){target="_blank"} avec un minimum de colonne (doit être appelé `id`) avec node des noms:
 
 ```{r}
 # nodes
@@ -25,7 +25,7 @@ boroughs <- data.frame(id = c("The Bronx", "Manhattan", "Queens", "Brooklyn", "S
 ```
 
 
-Create a separate data frame of [edges](https://datastorm-open.github.io/visNetwork/edges.html){target="_blank"} with `from` and `to` columns. 
+Créer un séparé data frame de [edges](https://datastorm-open.github.io/visNetwork/edges.html){target="_blank"} avec `from` et `to` columns. 
 
 
 ```{r}
@@ -34,7 +34,7 @@ connections <- data.frame(from = c("The Bronx", "The Bronx", "Queens", "Queens",
 ```
 
 
-Draw the network with `visNetwork(nodes, edges)`
+Dessine le network avec `visNetwork(nodes, edges)`
 
 ```{r}
 library(visNetwork)
@@ -42,7 +42,7 @@ visNetwork(boroughs, connections)
 ```
 
 
-Add labels by adding a label column to `nodes`:
+Ajouter labels en ajoutant un label column à `nodes`:
 
 ```{r message=FALSE}
 library(dplyr)
@@ -54,17 +54,17 @@ visNetwork(boroughs, connections)
 
 ### Performance
 
-`visNetwork` can be very slow. 
+`visNetwork` peut être très lent. 
 
-`%>% visPhysics(stabilization = FALSE)` starts rendering before the stabilization is complete, which does actually speed things up but allows you to see what's happening, which makes a big difference in user experience.  (It's also fun to watch the network stabilize).  Other performance tips are described [here](https://datastorm-open.github.io/visNetwork/performance.html){target="_blank"}.
+`%>% visPhysics(stabilization = FALSE)` starts rendering avant que la stabilisation soit complète, ce qui accélère réellement les choses mais vous permet de voir ce qui se passe, ce qui fait une grande différence dans l'expérience utilisateur. (C’est aussi amusant de regarder la network stabilize).  D'autres astuces de performance sont décrites [here](https://datastorm-open.github.io/visNetwork/performance.html){target="_blank"}.
   
 ### Helpful configuration tools  
   
-`%>% visConfigure(enabled = TRUE)` is a useful tool for configuring options interactively.  Upon completion, click "generate options" for the code to reproduce the settings. More [here](https://datastorm-open.github.io/visNetwork/configure.html){target="_blank"} (Note that changing options and then viewing them requires a lot of vertical scrolling in the browser.  I'm not sure if anything can be done about this. If you have a solution, let me know!)
+`%>% visConfigure(enabled = TRUE)` est un outil utile pour configurer les options de manière interactive. Une fois terminé, cliquez sur "generate options" pour que le code reproduise les paramètres. More [here](https://datastorm-open.github.io/visNetwork/configure.html){target="_blank"} (Notez que changer les options puis les visualiser nécessite beaucoup de défilement vertical dans le navigateur. Je ne suis pas sûr si quelque chose peut être fait à ce sujet. Si vous avez une solution, faites le moi savoir!)
   
 ### Coloring nodes
 
-Add a column of actual color names to the nodes data frame:
+Ajouter une colonne de noms de couleurs réelles à la nodes data frame:
 
 ```{r}
 boroughs <- boroughs %>% mutate(is.island = c(FALSE, TRUE, FALSE, FALSE, TRUE)) %>% mutate(color = ifelse(is.island, "blue", "yellow"))
@@ -81,7 +81,7 @@ visNetwork(boroughs, connections) %>%
 
 ### Turn off the physics simulation
 
-It's much faster without the simulation. The nodes are randomly placed and can be moved around without affecting the rest of the network, at least in the case of small networks.
+C'est beaucoup plus rapide sans la simulation. Le nodes sont placés au hasard et peuvent être déplacés sans affecter le reste de la network, au moins dans le cas de petites networks.
 
 ```{r}
 visNetwork(boroughs, connections) %>% 
@@ -90,7 +90,7 @@ visNetwork(boroughs, connections) %>%
 
 ### Grey out nodes far from selected (defined by "degree")
 
-(Click a node to see effect.)
+(Cliquez node pour voir l'effet.)
 
 ```{r}
 # defaults to 1 degree
