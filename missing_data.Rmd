@@ -1,19 +1,21 @@
-# Missing Data {#missing}
+# Données manquantes {#missing}
 
 ![](images/banners/banner_missing.png)
-*This chapter originated as a community contribution created by [ujjwal95](https://github.com/ujjwal95){target="_blank"}*
 
-*This page is a work in progress. We appreciate any input you may have. If you would like to help improve this page, consider [contributing to our repo](contribute.html).*
+*Ce chapitre a été réalisé dans le cadre d'une collaboration communautaire créée par [ujjwal95](https://github.com/ujjwal95){target="_blank"}*
 
-## Overview
-This section covers what kinds of missing values are encountered in data and how to handle them.
+*Cette page est en cours de réalisation. Nous apprécions tout commentaire ou feedback. Si vous voulez participez et nous aider à améliorer cette page, vous pouvez [contribuer à notre repo](contribute.html).*
+
+## Vue d'ensemble
+Dans cette section, nous verrons plusieurs types de données manquantes et la façon de les traiter. 
 
 ## tl;dr
-It's difficult to handle missing data! If your data has some missing values, which it most likely will, you can either remove such rows, such columns, or impute them.
+Il peut être difficile de traiter des données manquantes! S'il manque des données dans nos datasets, ce qui est très souvent le cas, on peut soit s'en débarrasser, soit en déduire la valeur. 
 
-## What are NAs?
+## Que sont les NAs?
 
-Whenever data in some row or column in your data is missing, it comes up as NA. Let's have a look at some data, shall we?
+Lorsqu'une donnée dans un rang ou colonne est manquante, elle apparaitra sous de la forme NA. Regardons ça d'un peu plus près:
+
 ```{r echo = FALSE, message=FALSE}
 library(tidyverse)
 library(scales)
@@ -31,7 +33,7 @@ library(knitr)
 kable(data)
 ```
 
-We can see the number of NAs in each column and row:
+On peut aussi voir le nombre de NAs dans chaque rang et colonne.
 ```{r}
 colSums(is.na(data))
 ```
@@ -40,7 +42,7 @@ colSums(is.na(data))
 rowSums(is.na(data))
 ```
 
-We can also see the ratio of the number of NAs in each column and row:
+On peut aussi calculer le ratio du nombre de NAs dans chaque rang et colonne:
 ```{r}
 colMeans(is.na(data))
 ```
@@ -49,20 +51,19 @@ colMeans(is.na(data))
 rowMeans(is.na(data))
 ```
 
-## Types of Missing Data
+## Types de Données Manquantes
 
-- **Missing Completely at Random (MCAR)**: These are missing data values which are not related to any missing or non-missing values in other columns in the data.
+- **Missing Completely at Random (MCAR)**: Ce sont des valeurs manquantes qui ne sont pas liées à d'autres valeurs, manquantes ou non, du dataset. 
 
-- **Missing at Random (MAR)**: These are missing data which are linked to one or more groups in the data. The great thing about MAR is that MAR values can be predicted using other features. For example, it may be observed that people older than 70 generally do not enter their income. 
-Most of the data we encounter is MAR.
+- **Missing at Random (MAR)**: Ce sont des valeurs manquantes qui sont liées à un ou plusieurs autres groupes de données dans le dataset. La bonne nouvelle avec les valeurs manquantes de ce type-là, c'est qu'elles peuvent être déduites (et prédites) par d'autres données présentes dans le dataset. Par exemple, on peut observer que des personnes de plus de 70 ans ont tendance à ne pas donner d'informations sur leur salaire. La plupart des données manquantes à traiter dans la vraie vue sont de ce type-là.  
 
-- **Missing Not at Random (MNAR)**: Generally, data which is not MAR is MNAR. A big problem is that there is not a huge distinction between MAR and MNAR. We generally assume MAR, unless otherwise known by an outside source.
+- **Missing Not at Random (MNAR)**: En général, une donnée manquante qui n'est pas MAR est MNAR. Le problème est cependant qu'il n'y a pas de grande distinction entre les deux. On supposera donc que la donnée manquante est de type MAR à moins que le contraire soit précisé et confirmé par une source extérieure.
 
-## Missing Patterns 
+## Patterns manquants 
 
-### Missing Patterns by columns
+### Patterns manquants par colonne
 
-We can see some missing patterns in data by columns,
+On peut voir certains patterns manquants dans les données par colonne,
 ```{r echo = FALSE, warning=FALSE}
 tidy_names <- data %>% 
   gather(key, value, -Name) %>% 
@@ -77,7 +78,7 @@ ggplot(tidy_names, aes(x = key, y = fct_rev(Name), fill = missing)) +
   theme_bw()
 ```
 
-And we can also add a scale to check the numerical values available in the dataset and look for any trends:
+Et on peut aussi ajouter une échelle de valeur pour vérifier les valeurs numériques disponibles dans le dataset et tenter de trouver des tendances:
 ```{r message=FALSE}
 library(scales) # for legend
 # Select columns having numeric values
@@ -91,8 +92,8 @@ ggplot(data = filtered_for_numeric, aes(x = key, y = fct_rev(Name), fill = value
   theme_bw()
 ```
 
-Can you see the problem with the above graph? Notice that the scale is for *all* the variables, hence it cannot show the variable level differences!
-To solve this problem, we can standardize the variables:
+Est-ce que vous pouvez voir le problème avec le graphe ci-dessus? Avez-vous vu que l'échelle est pour *toutes* les valeurs, et que donc on ne peut pas voir les différences de niveau entre variables?
+Pour résoudre ce problème, on peut standardiser les variables:
 ```{r}
 filtered_for_numeric <- filtered_for_numeric %>% 
   group_by(key) %>% 
@@ -105,7 +106,7 @@ ggplot(filtered_for_numeric, aes(x = key, y = fct_rev(Name), fill = Std)) +
 
 ```
 
-Now, we can see the missing trends better! Let us sort them by the number missing by each row and column:
+Maintenant, on peut mieux voir les patterns manquants! Trions-les selon le nombre manquant pour chaque rang et colonne:
 ```{r}
 # convert missing to numeric so it can be summed up
 filtered_for_numeric <- filtered_for_numeric %>% 
@@ -117,17 +118,17 @@ ggplot(filtered_for_numeric, aes(x = fct_reorder(key, -missing2, sum), y = fct_r
 
 ```
 
-### Missing Patterns by rows
+### Patterns manquants par rang
 
-We can also see missing patterns in data by rows using the `mi` package:
+On peut aussi voir les patterns manquants dans le dataset par rang en utilisant le package `mi`:
 ```{r message=FALSE}
 library(mi)
 x <- missing_data.frame(data)
 image(x)
 ```
 
-Did you notice that the `Education` variable has been skipped? That is because the whole column is missing.
-Let us try to see some patterns in the missing data:
+Avez-vous remarqué que la variable `Education` n'a pas été prise en compte? C'est parce que toute la colonne est manquante. 
+Essayons maintenant de trouver des patterns dans les données manquantes:
 ```{r}
 x@patterns
 ```
@@ -141,66 +142,69 @@ levels(x@patterns)
 summary(x@patterns)
 ```
 
-We can visualize missing patterns using the `visna` (VISualize NA) function in the `extracat` package:
+On peut visualiser les patterns manquants en utilisant la fonction `visna` (VISualize NA) dans le package `extracat`:
 ```{r}
 extracat::visna(data)
 ```
-
-Here, the rows represent a missing pattern and the columns represent the column level missing values. The advantage of this graph is that it shows you only the missing patterns available in the data, not all the possible combinations of data (which will be 2^6 = 64), so that you can focus on the pattern in the data itself. 
+ 
+Ici, les rangs représentent un pattern manquant et les colonnes représentent le niveau de la colonne dans laquelle les valeurs sont manquantes. L'avantage de ce graph est qu'il montre seulement les patterns manquants qui sont disponibles dans les données et pas toutes les combinaisons possibles de données (ce qui reviendrait à 2^6 = 64), et on peut donc se concentrer sur le pattern dans les données elles-mêmes. 
 
 We can sort the graph by most to least common missing pattern (i.e., by row):
+On peut réarranger le graphe du pattern manquant le plus commun au moins commun. 
 ```{r}
 extracat::visna(data, sort = "r")
 ```
 
-Or, by most to least missing values (i.e., by column):
+Ou du plus au moins de valeurs manquantes (ex: par colonne):
 ```{r}
 extracat::visna(data, sort = "c")
 ```
 
-Or, by both row and column sort:
+Ou on peut également trier par rang et colonne: 
 ```{r}
 extracat::visna(data, sort = "b")
 ```
 
-## Handling Missing values
+## Traiter les valeurs manquantes
 
-There are multiple methods to deal with missing values.
+il y a plusieurs méthodes pour traiter les valeurs manquantes
 
-### Deletion of rows containing NAs
+### Supression des rangs comprenant des NAs 
 
-Often we would delete rows that contain NAs when we are handling Missing Completely at Random data.
-We can delete the rows having NAs as below:
+Souvent, on supprimera les rangs qui contiennent des NAs lorsqu'on fait face à des données MCR. 
+On peut procéder de la façon suivante:
 ```{r}
 na.omit(data)
 ```
 
-This method is called *list-wise deletion*. It removes all the rows having NAs. But we can see that the Education column is only NAs, so we can remove that column itself:
+Cette méthode est appelée *list-wise deletion*. Elle supprime tous les rangs avec des NAs. Mais comme on peut voir que la colonne 'Education' ne contient que des NAs, on peut supprimer toute la colonne:
 ```{r}
 edu_data <- data[, !(colnames(data) %in% c("Education"))]
 na.omit(edu_data)
 ```
 
-Another method is *pair-wise deletion*, in which only the rows having missing values in the variable of interest are removed.
+On peut également parler d'une autre méthode appelée *pair-wise deletion*, avec laquelle seulement les rangs qui possèdent des valeurs manquantes dans la variable d'intérêt seront supprimés. 
 
-### Imputation Techniques
+### Technique de prédiction
 
 Imputation means to replace missing data with substituted values. These techniques are generally used with MAR data.
+Une autre possibilité est de remplacer les valeurs manquantes par des valeurs de substitution. Ces techniques sont généralement utilisées avec des données MAR. 
 
-#### Mean/Median/Mode Imputation
+#### Substition par la Moyenne/Médiane/Mode 
 
-We can replace missing data in continuous variables with their mean/median and missing data in discrete/categorical variables with their mode.
+On peut remplacer les valeurs manquantes pour des variables continues par leur moyenne ou médiane et les valeurs manquantes pour des variables discrètes ou catégorielles par leur mode. 
 
-Either we can replace all the values in the missing variable directly, for example, if "Income" has a median of 15000, we can replace all the missing values in "Income" with 15000, in a technique known as *Generalized Imputation*.
+Soit on remplace toutes les valeurs de la variable manquante directement (par exemple, si 'Income' a une médiane de 15000, on remplace toutes les variables manquantes de "Income" par 15000) grâce à une technique qu'on appelle *Generalized Imputation*.
 
-Or, we can replace all values on a similar case basis. For example, we notice that the income of people with `Age > 60` is much less than those with `Age < 60`, on average, and hence we calculate the median income of each `Age` group separately, and impute values separately for each group.
+Soit on remplace toutes les valeurs sur base de cas similaires. Par exemple, si on remarque les personnes avec `Age > 60` ont un salaire beaucoup plus bas que ceux avec `Age < 60` en moyenne, on va calculer le salaire médian pour chaque groupe d'`Age` séparément.
 
-The problem with these methods is that they disturb the underlying distribution of the data.
+Le problème avec ces méthodes cependant est qu'elles perturbent la distribution sous-jacente de nos données. 
 
-### Model Imputation
-There are several model based approaches for imputation of data, and several packages, like [mice](https://cran.r-project.org/web/packages/mice/index.html){target="_blank"}, [Hmisc](https://cran.r-project.org/web/packages/Hmisc/index.html){target="_blank"}, and [Amelia II](https://cran.r-project.org/web/packages/Amelia/index.html){target="_blank"}, which deal with this.
+### Prédiction par modèle
 
-For more info, checkout [this blog on DataScience+ about imputing missing data with the R mice package](https://datascienceplus.com/imputing-missing-data-with-r-mice-package/){target="_blank"}.
+Il existe plusieurs modèles pour tenter de prédire les données manquantes ainsi que plusieurs packages comme [mice](https://cran.r-project.org/web/packages/mice/index.html){target="_blank"}, [Hmisc](https://cran.r-project.org/web/packages/Hmisc/index.html){target="_blank"}, et [Amelia II](https://cran.r-project.org/web/packages/Amelia/index.html){target="_blank"}.
+
+Pour plus d'info, veuillez lire [ce blog sur DataScience+ sur la prédiction de données manquantes avec le package mice en R](https://datascienceplus.com/imputing-missing-data-with-r-mice-package/){target="_blank"}.
 
 ## External Resources
 - [Missing Data Imputation](http://www.stat.columbia.edu/~gelman/arm/missing.pdf){target="_blank"} - A PDF by the Stats Department at Columbia University regarding Missing-data Imputation
