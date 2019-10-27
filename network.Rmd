@@ -6,12 +6,12 @@
 
 ## visNetwork (interactive)
 
-`visNetwork` est un puissant R implémentation du graphe intéractif JavaScript `vis.js` library; il utilise `tidyverse` piping: [VisNetwork Docs](https://datastorm-open.github.io/visNetwork/){target="_blank"}.
+`visNetwork` est une puissante implémentation via R de la librairie JavaScript `vis.js`; il utilise `tidyverse`: [Documentation VisNetwork](https://datastorm-open.github.io/visNetwork/){target="_blank"}.
 
---> Le Vignette a des exemples clairement élaborés: https://cran.r-project.org/web/packages/visNetwork/vignettes/Introduction-to-visNetwork.html
+--> Le Vignette a des exemples clairement élaborés disponibles sur : https://cran.r-project.org/web/packages/visNetwork/vignettes/Introduction-to-visNetwork.html
 
 
-Le `visNetwork` documentation ne fournit pas le même niveau d’explication que l’original, il est donc intéressant de consulter le `vis.js` documentation ainsi que:
+La documentation `visNetwork` ne fournit pas le même niveau d’explication que l’original, il est donc intéressant de consulter le `vis.js` documentation ainsi que:
 http://visjs.org/index.html  En particulier, le [interactive examples](http://visjs.org/network_examples.html){target="_blank"} sont particulièrement utiles pour essayer différentes options. Par exemple, vous pouvez tester des options de physique avec cette [network configurator](http://visjs.org/examples/network/physics/physicsConfiguration.html){target="_blank"}. 
 
 
