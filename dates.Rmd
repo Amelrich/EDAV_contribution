@@ -1,21 +1,21 @@
-# Dates in R {#dates}
+# Dates dans R {#dates}
 
 ![](images/banners/banner_dates.png)
 
 ## Introduction
 
-Working with dates and time can be very frustrating.  In general, work with the least cumbersome class. That means if your variable is *years*, store it as an integer; there's no reason to use a date or date-time class. If your variable does not involve time, use the `Date` class in R.
+Travailler avec des dates peut être très frustrant. En général, le mieux est de travailler avec la classe de données la plus facile. Cela signifie par exemple que si la variable avec laquelle on travaille est en *années*, le mieux est d'en faire un integer; il n'y a pas de raison d'en faire une variable de la classe date ou date-time. Si par contre, ce n'est pas possible d'utiliser une de ces classes simplifiées, on peut utiliser la classe `Date` dans R. 
 
-## Converting to `Date` class
+## Convertir en la classe `Date` 
 
- You can convert character data to `Date` class with `as.Date()`:
+ On peut convertir une variable de classe character en une variable de classe `Date`en utilisant `as.Date()`:  
 
 ```{r}
 dchar <- "2018-10-12"
 ddate <- as.Date(dchar)
 ```
 
-Note that the two appear the same, although the class is different:
+Notez que les deux apparaissent de la même manière, même si leur classe est différente. 
 
 ```{r}
 dchar
@@ -24,46 +24,43 @@ class(dchar)
 class(ddate)
 ```
 
-If the date is not in YYYY-MM-DD or YYYY/MM/DD form, you will need to specify the format to convert to `Date` class, using conversion specifications that begin with `%`, such as:
+Si la date n'a pas le format YYYY-MM-DD ou YYYY/MM/DD, il faudra spécifier le format dans lequel on souhaite convertir la nouvelle variable de classe `Date` en utilisant le symbole `%` de la façon suivante:
 
 ```{r}
 as.Date("Thursday, January 6, 2005", format = "%A, %B %d, %Y")
 ```
 
-For a list of the conversion specifications available in R, see `?strptime`.
+Pour une liste de toutes les spécifications possibles dans R, voir `?strptime`.
 
-The tidyverse **lubridate** makes it easy to convert dates that are not in standard format with `ymd()`, `ydm()`, `mdy()`, `myd()`, `dmy()`, and `dym()` (among many other useful date-time functions):
+Tidyverse **lubridate** rend la conversion de dates qui ne sont pas dans un format standard très facile grâce aux fonctions `ymd()`, `ydm()`, `mdy()`, `myd()`, `dmy()`, `dym()` et autres.
 
 ```{r}
 lubridate::mdy("April 13, 1907")
 ```
 
-Try `as.Date("April 13, 1907")` and you will see the benefit of using a **lubridate** function.
+Essayez `as.Date("April 13, 1907")` et vous verrez les avantages d'utiliser une fonction **lubridate**.
 
-## Working with `Date` Class
+## Travaillez avec la classe `Date`
 
-It is well worth the effort to convert to `Date` class, because there's a lot you can do with dates in a `Date` class that you can't do if you store the dates as character data.
+Cela vaut clairement la peine de convertir des variables en la classe `Date` car on peut faire beaucoup de choses avec ce genre de variable qu'on ne pourrait pas faire si on les avait laissés en character. 
 
-Number of days between dates:
+Nombre de jours entre deux dates:
 
 ```{r}
 as.Date("2017-11-02") - as.Date("2017-01-01")
 ```
 
-Compare dates:
+Comparer deux dates:
 ```{r}
 as.Date("2017-11-12") > as.Date("2017-3-3")
 ```
 
-Note that `Sys.Date()` returns today's date as a `Date` class:
-
+Notez que `Sys.Date()` renvoie la date d'aujourd'hui en une variable de classe `Date`:
 ```{r}
 Sys.Date()
 class(Sys.Date())
 ```
-
-R has functions to pull particular pieces of information from a date:
-
+R a des fonctions pour extraire des informations particulières à partir d'une date:
 ```{r}
 today <- Sys.Date()
 weekdays(today)
@@ -73,7 +70,7 @@ months(today, abbreviate = TRUE)
 quarters(today)
 ```
 
-The **lubridate** package provides additional functions to extract information from a date:
+Le package **lubridate** procure des fonctions additionnelles pour extraire plus d'information à partir d'une date de classe `Date`:
 
 ```{r}
 today <- Sys.Date()
@@ -86,9 +83,9 @@ lubridate::week(today)
 lubridate::wday(today)
 ```
 
-## Plotting with a `Date` class variable
+## Tracez des graphes avec une variable de classe `Date` 
 
-Both base R graphics and **ggplot2** "know" how to work with a `Date` class variable, and label the axes properly:
+On peut travailler avec base R graphics et **ggplot2**, les deux peuvent travailler avec une variable de la classe `Date` et nommer les axes correctement:
 
 ### base R
 
@@ -99,7 +96,7 @@ plot(df$DATE, df$X5.1.ARM, type = "l") # on the order of years
 plot(df$DATE[1:30], df$X5.1.ARM[1:30], type = "l") # switch to months
 ```
 
-Note the the change in x-axis labels in the second graph.
+Notez le changement des labels de l'axe x dans le deuxième graphe. 
 
 ### ggplot2
 
@@ -108,8 +105,7 @@ Note the the change in x-axis labels in the second graph.
 library(tidyverse)
 ```
 
-Note that unlike base R`read.csv()`, `readr::read_csv()` automatically reads DATE in as a `Date` class since it's in YYYY-MM-DD format:
-
+Notez que contrairement à `read.csv()` de base R, `readr::read_csv()` lit automatiquement DATE comme une variable de classe `Date` par ce que cette variable est déjà sous la forme YYYY-MM-DD:
 ```{r, out.width='50%'}
 df <- readr::read_csv("data/mortgage.csv")
 
@@ -126,12 +122,11 @@ ggplot(df %>% filter(DATE < as.Date("2006-01-01")),
 
 ```
 
-Again, when the data is filtered, the x-axis labels switch from years to months.
+A nouveau, lorsque les données sont filtrées, les labels de l'axe x changent de years à months. 
 
 #### Breaks, limits, labels
 
-We can control the x-axis breaks, limits, and labels with `scale_x_date()`:
-
+On peut contrôler les breaks, limits et labels de l'axe x grâce à `scale_x_date()`:
 
 ```{r, message = FALSE, warning=FALSE, out.width='50%'}
 library(lubridate)
@@ -145,11 +140,11 @@ g + scale_x_date(date_labels = "%Y-%m") +
   ggtitle("scale_x_date(date_labels = \"%Y-%m\")")
 ```
 
-(Yes, even in the tidyverse we cannot completely escape the `%` conversion specification notation.  Remember `?strptime` for help.)
+(Oui, même dans le package tidyverse on ne peut pas complètement échapper à l'utilisation de `%` pour convertir les formats des dates. Pour rappel, `?strptime` si besoin d'aide). 
 
 #### Annotations
 
-We can use `geom_vline()` with `annotate()` to mark specific events in a time series:
+On peut utiliser `geom_vline()` et `annotate() pour marquer des événements spécifiques dans une série temporelle: 
 
 ```{r, warning=FALSE, out.width='50%'}
 ggplot(df, aes(DATE, `30 YR FIXED`)) + 
@@ -170,5 +165,3 @@ ggplot(df, aes(DATE, `30 YR FIXED`)) +
 ```{r}
 Sys.time()
 ```
-
-*Considering submitting a pull request to expand this section.*
