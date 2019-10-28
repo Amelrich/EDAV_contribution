@@ -8,7 +8,7 @@
 
 ## Vue d'ensemble
 
-Vous connaissez certainement différentes libraries qui peuvent vous aider à afficher des données géographiques telles que `ggmap` et` choroplethr`. Bien que ces libraries fournissent de nombreuses fonctionnalités intéressantes pour mieux présenter les informations avec des graphes 2D, ils leur manquent encore une caractéristique importante : l’interactivité. Voici "leaflet" - une librairie écrit en javascript pour gérer les cartes interactives. Fait amusant : il est activement utilisé par de nombreux grands journaux, tels que le New York Times ou le Washington Post.
+Vous connaissez certainement différentes libraries pour afficher des données géographiques telles que `ggmap` et` choroplethr`. Bien que ces libraries fournissent de nombreuses fonctionnalités intéressantes pour mieux présenter les informations avec des graphes 2D, ils leur manquent encore une caractéristique importante : l’interactivité. Voici "leaflet" - une librairie écrit en javascript pour gérer les cartes interactives. Fait amusant : il est activement utilisé par de nombreux grands journaux, tels que le New York Times ou le Washington Post.
 
 Plongeons nous dedans.
 
@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Brève description du jeu de données
-Pour notre analyse, nous utilisons NYC Open Data décrivant les écoles en New York City en 2016. [Vous en trouverez plus sur la page Kaggle.](https://www.kaggle.com/passnyc/data-science-for-good/home){target="_blank"} Nous allons nous concentrer sur le distributions de différentes variables en tant que factor de positions géographiques.
+Pour notre analyse, nous utiliserons le NYC Open Data décrivant les écoles de New York City en 2016. [Vous en trouverez plus sur la page Kaggle.](https://www.kaggle.com/passnyc/data-science-for-good/home){target="_blank"} Nous allons nous concentrer sur les distributions de différentes variables en tant que facteur de positions géographiques.
 
 ```{r load library, eval=TRUE, message=FALSE}
 library(tidyverse)
@@ -29,7 +29,7 @@ schools <- read_csv('data/2016_school_explorer.csv')
 ```
 
 ## Plotting Markers
-Ici, nous pouvons voir que toutes les écoles privées à New York ont été tracées sur une carte qui permet de zoomer et dézoomer. Les marqueurs sont utilisés pour indiquer l'emplacement de chaque école. Si nous survolons un marqueur, il affiche le nom de l'école. Trop cool!
+Ici, nous pouvons voir que toutes les écoles privées à New York ont été tracées sur une carte que l'on peut zoomer et dézoomer. Les marqueurs sont utilisés pour indiquer l'emplacement de chaque école. Si nous survolons un marqueur, il affiche le nom de l'école. Trop cool, non ?!
 
 ```{r fig1-plot, echo=FALSE, warning=FALSE, message=FALSE, fig.height=6, fig.width=9}
 lat<-median(schools$Latitude)
@@ -43,7 +43,7 @@ schools %>%
   setView(lng=lon,lat=lat, zoom = 10)
 ```
 
-Voici le code pour cela:
+Voici le code :
 
 ```{r fig1, eval=FALSE, message=FALSE}
 lat<-median(schools$Latitude)
@@ -57,8 +57,8 @@ schools %>%
   setView(lng=lon,lat=lat, zoom = 10)
 ```
 
-## Dynamic Heatmaps
-Heatmaps sont des outils vraiment utiles pour visualiser la distribution d'une variable particulière sur une région donnée (ils sont si utiles, [nous avons une page sur eux](heatmap.html)). Dans cet exemple, nous voyons comment `leaflet` est capable de calculer dynamiquement le nombre d'écoles dans une région donnée à partir de données de latitude et de longitude uniquement. Vous pouvez en faire l'expérience en effectuant un zoom avant ou arrière du graphique.
+## Heatmaps dynamiques
+Les Heatmaps sont des outils vraiment utiles pour visualiser la distribution d'une variable particulière sur une région donnée (ils sont si utiles que [nous avons une page sur eux](heatmap.html)). Dans cet exemple, nous voyons comment `leaflet` est capable de calculer dynamiquement le nombre d'écoles dans une région donnée à partir de données de latitude et de longitude uniquement. Vous pouvez en faire l'expérience en effectuant un zoom avant ou arrière dans le graphique.
 
 ```{r fig2-plot, echo=FALSE, warning=FALSE, message=FALSE, fig.height=6, fig.width=9}
 lat<-mean(schools$Latitude)
@@ -70,7 +70,7 @@ leaflet(schools) %>%
   setView(lng=lon,lat=lat, zoom = 10)
 ```
 
-Voici le code pour cela:
+Voici le code :
 
 ```{r fig2, eval=FALSE, message=FALSE}
 lat<-mean(schools$Latitude)
@@ -82,7 +82,7 @@ leaflet(schools) %>%
   setView(lng=lon,lat=lat, zoom = 10)
 ```
 
-## Dynamic Clustering
+## Clustering dynamique
 Nous pouvons voir ici comment `leaflet` permet de regrouper dynamiquement des données en fonction de leur distance géographique à un niveau de zoom donné.
 
 ```{r fig3-plot, echo=FALSE, warning=FALSE, message=FALSE, fig.height=6, fig.width=9}
@@ -93,7 +93,7 @@ schools %>%
                          clusterOptions = markerClusterOptions()) 
 ```
 
-Voici le code pour cela:
+Voici le code :
 
 ```{r fig3, eval=FALSE, message=FALSE}
 schools %>% 
@@ -103,7 +103,7 @@ schools %>%
                          clusterOptions = markerClusterOptions()) 
 ```
 
-## Plotting Groups
+## Afficher les groupes
 
 ```{r fig4-plot, echo=FALSE, warning=FALSE, message=FALSE, fig.height=6, fig.width=9}
 top<- schools %>%
@@ -125,7 +125,7 @@ top %>%
             opacity = 0.8)
 ```
 
-Voici le code pour cela:
+Voici le code :
 
 ```{r fig4, eval=FALSE, message=FALSE}
 top<- schools %>%
@@ -147,8 +147,8 @@ top %>%
             opacity = 0.8)
 ```
 
-## Plotting Categorical Data
-Nous pouvons visualiser la distribution d'une classe particulière sur la carte commune. Ceci est réalisé grâce à un widget interactif situé en haut à droite qui permet de choisir une catégorie particulière ou plusieurs catégories. L'exemple ci-dessous montre comment les écoles de différents quartiers sont ségréguées de manière raciale.
+## Afficher des données catégorielles
+Nous pouvons visualiser la distribution d'une catégorie particulière sur la carte. Ceci est réalisé grâce à un widget interactif situé en haut à droite qui permet de choisir une ou plusieurs catégories particulières. L'exemple ci-dessous montre comment les écoles de diffèrents, certains quartiers sont séparés de manière raciale.
 
 ```{r fig5-plot, echo=FALSE, warning=FALSE, message=FALSE, fig.height=6, fig.width=9}
 ss <- schools %>% dplyr::select(`School Name`,Latitude, Longitude,`Percent White`, `Percent Black`, `Percent Asian`, `Percent Hispanic`)
@@ -200,7 +200,7 @@ m3 %>% addCircleMarkers(data = black, radius = 2, label = ~htmlEscape(`School Na
 
 ```
 
-Voici le code pour cela:
+Voici le code :
 
 ```{r fig5, eval=FALSE, message=FALSE}
 ss <- schools %>% dplyr::select(`School Name`,Latitude, Longitude,`Percent White`, `Percent Black`, `Percent Asian`, `Percent Hispanic`)
@@ -251,9 +251,9 @@ m3 %>% addCircleMarkers(data = black, radius = 2, label = ~htmlEscape(`School Na
         setView(lng=lng,lat=lat,zoom=10)
 ``` 
 
-Ces exemples ne donnent qu'un aperçu de ce qui est vraiment possible avec ce library. Si vous souhaitez explorer davantage de fonctionnalités et de cas d'utilisation, consultez les liens ci-dessous.
+Ces exemples ne donnent qu'un aperçu de ce qui est vraiment possible avec cette librairie. Si vous souhaitez explorer davantage de fonctionnalités et de cas d'utilisation, consultez les liens ci-dessous.
  
 ## External Resources 
-- [Leaflet in R Documentation](https://rstudio.github.io/leaflet/){target="_blank"}: main documentation of the package.
-- [Basic leaflet maps in R](https://rpubs.com/mattdray/basic-leaflet-maps){target="_blank"}: tutorial with examples.
-- [Interesting Kaggle Kernel visualizing earthquake data using leaflet in R ](https://www.kaggle.com/verawe/earthquakes-leaflet-highcharter-visualizations){target="_blank"}: another use-case to explore.
+- [Leaflet in R Documentation](https://rstudio.github.io/leaflet/){target="_blank"}: documentation principale du package.
+- [Basic leaflet maps in R](https://rpubs.com/mattdray/basic-leaflet-maps){target="_blank"}: tutoriel avec exemples.
+- [Interesting Kaggle Kernel visualizing earthquake data using leaflet in R ](https://www.kaggle.com/verawe/earthquakes-leaflet-highcharter-visualizations){target="_blank"}: un autre cas d'étude à explorer.
