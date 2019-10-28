@@ -5,22 +5,22 @@
 <!-- Section en construction
 ----------------------------------------------------------------------------- -->
 ![Maps](images/banners/banner_maps.png)
-*Cette page est un travail en cours. Nous apprécions toute contribution que vous pourriez avoir. Si vous souhaitez aider à améliorer cette page, considérez[contribuer à notre repo](contribute.html).*
+*En cours de progression. Toute amélioration est la bienvenue. Si vous souhaitez participer rendez vous sur [contribuer au repo](contribute.html).*
 <!-- ------------------------------------------------------------------------ -->
 
 
-## Choropleth maps
+## Les choropleth maps
 
-Choropleth maps utilisez la couleur pour indiquer la valeur d'une variable dans une région définie, généralement des limites politiques. ["Mapping in R just got a whole lot easier"](https://www.computerworld.com/article/3175623/mapping-in-r-just-got-a-whole-lot-easier.html){target="_blank"} par Sharon Machlis (2017-03-03) propose un tutoriel sur l'utilisation du **tmap**, **tmaptools**, et **tigris** paquets à créer choropleth maps. Notez qu'avec cette approche, vous devrez fusionner des fichiers de formes géographiques avec vos fichiers de données, puis mapper. 
+Les choropleth maps utilisent de la couleur pour indiquer la valeur d'une variable dans une région définie, généralement région politiques. ["Mapping in R just got a whole lot easier"](https://www.computerworld.com/article/3175623/mapping-in-r-just-got-a-whole-lot-easier.html){target="_blank"} par Sharon Machlis (2017-03-03) propose un tutoriel sur l'utilisation des packages **tmap**, **tmaptools**, et **tigris** pour créer des choropleth maps. Notez qu'avec cette approche, vous devrez fusionner des shapefiles géographiques avec vos autres données, avant de mapper. 
 
-["Step-by-Step Choropleth Map in R: A case of mapping Nepal"](https://medium.com/@anjesh/step-by-step-choropleth-map-in-r-a-case-of-mapping-nepal-7f62a84078d9){target="_blank"} parcourt le processus de création d'un **rgdal** et **ggplot2**.  (Nous n'avons suivi aucun de ces tutoriels pas à pas.... Si vous le faites, veuillez donner votre avis en [submitting an issue](https://github.com/jtr13/EDAV/issues){target="_blank"}).
+["Step-by-Step Choropleth Map in R: A case of mapping Nepal"](https://medium.com/@anjesh/step-by-step-choropleth-map-in-r-a-case-of-mapping-nepal-7f62a84078d9){target="_blank"} parcourt le processus de création d'une choropleth map avec **rgdal** et **ggplot2**.  (Nous n'avons suivi aucun de ces tutoriels pas à pas.... Si vous le faites, veuillez donner votre avis en [soumettant un avis](https://github.com/jtr13/EDAV/issues){target="_blank"}).
 
 
-Le **choroplethr** package permet de dessiner facilement des cartes choroplèthes [U.S. states, countries, and census tracts, as well as countries of the world](https://arilamstein.com/documentation/choroplethr/reference/){target="_blank"} sans traiter directement avec les fichiers de forme. Le compagnon package, **choroplethrZip**, fournit des données pour [zip code level choropleths](https://arilamstein.com/creating-zip-code-choropleths-choroplethrzip/){target="_blank"}; **choroplethrAdmin1** dessine choropleths pour les régions administratives de [world countries](https://rdrr.io/cran/choroplethrAdmin1/man/get_admin1_countries.html){target="_blank"}. Ce qui suit est un bref tutoriel sur l’utilisation de ces packages.
+Le package **choroplethr** permet de dessiner facilement des choropleth maps des [États américains, pays et secteurs de recensement, ainsi que les pays du monde](https://arilamstein.com/documentation/choroplethr/reference/){target="_blank"} sans traiter directement avec les shapefiles. Son compagnon le package, **choroplethrZip**, fournit des données pour faire des [choropleth sur les zip code](https://arilamstein.com/creating-zip-code-choropleths-choroplethrzip/){target="_blank"}; **choroplethrAdmin1** dessine des choropleths pour les régions administratives des [pays du monde](https://rdrr.io/cran/choroplethrAdmin1/man/get_admin1_countries.html){target="_blank"}. Ce qui suit est un bref tutoriel sur l’utilisation de ces packages.
 
-Remarque: Vous devez aussi install **choroplethrMaps** pour **choroplethr** travailler. En outre, **choroplethr** nécessite un certain nombre d’autres dépendances qui devraient être installé automatiquement, mais s'ils ne le sont pas, vous pouvez installer manuellement le fichier manquant packages que vous êtes averti lorsque vous appelez `library(choroplethr)`: **maptools**, et **rgdal**, **sp**.
+Remarque: Vous devrez aussi installer **choroplethrMaps** pour pouvoir travailler avec **choroplethr**. En outre, **choroplethr** possède un certain nombre d’autres dépendances qui devraient être installé automatiquement, mais si elles ne l'étaient pas, vous pouvez les installer manuellement le package manquant en appelant `library(choroplethr)`: **maptools**, et **rgdal**, **sp**.
 
-Nous allons utiliser le `state.x77` dataset pour cet exemple:
+Maintenant nous allons utiliser le jeu de données `state.x77` pour cet exemple:
 
 ```{r, warning=FALSE, message=FALSE}
 library(tidyverse)
@@ -37,14 +37,14 @@ state_choropleth(df_illiteracy,
                  legend = "Percent Illiterate")
 ```
 
-**Remarque**: le `choroplethr` "cours gratuit" que vous pouvez rencontrer arrive, cours par courrier sur une longue période, il ne constitue donc pas la meilleure option, à moins que vous ne disposiez de quelques semaines.
+**Remarque**: le "cours gratuit" `choroplethr` sur lequel vous pourriez tomber arrive un cours à la fois, il ne constitue donc pas la meilleure option, à moins que vous ne disposiez de quelques semaines à perdre.
 
 
 ## Square bins
 
-Packages tel que `statebins` créer choropleth style maps avec des régions de taille égale qui représentent approximativement l'emplacement de la région, mais pas la taille ou la forme.
+Les packages tels que `statebins` permettent de créer des choropleth maps des régions en maintenant approximativement l'emplacement de la région, mais ni la taille ni la forme.
 
-**Important**:  Ne pas install `statebins` de CRAN; utilisez le [dev version](https://github.com/hrbrmstr/statebins){target="_blank"} -- il contient de nombreuses améliorations, détaillées dans ["Statebins Reimagined"](https://rud.is/b/2017/11/18/statebins-reimagined/#comment-19346){target="_blank"}.
+**Important**:  N'installez pas `statebins` depuis CRAN; utilisez la [version en développement](https://github.com/hrbrmstr/statebins){target="_blank"} -- il contient de nombreuses améliorations, détaillées dans ["Statebins Reimagined"](https://rud.is/b/2017/11/18/statebins-reimagined/#comment-19346){target="_blank"}.
 
 ```{r}
 # devtools::install_github("hrbrmstr/statebins")
@@ -63,9 +63,9 @@ statebins(df_illit, value_col="Illiteracy",
   theme_statebins()
 ```
 
-## Longitude / Latitude data 
+## Données sur la Longitude / Latitude 
 
-Notez que les options ci-dessus fonctionnent avec *political boundaries*, basé sur les noms des régions que vous fournissez. Ces maps requièrent packages avec information de limite géographique. Longitude / latitude data, d'autre part, peut être tracé simplement comme scatterplot avec x = longitude et y = latitude, sans aucun background maps (juste ne pas confondre x & y!). La première partie de ["Data wrangling visualisation and spatial analysis: R Workshop"](http://www.seascapemodels.org/data/data-wrangling-spatial-course.html) par C. Brown, D. Schoeman, A. Richardson, et B. Venables fournit une procédure détaillée de spatial exploratory data analysis avec copepod data (un type de zooplancton) en utilisant cette technique avec `ggplot2::geom_point()`. 
+Notez que les options ci-dessus fonctionnent avec les *frontières politiques*, basé sur les noms des régions que vous fournissez. Ces maps requièrent packages avec information de limite géographique. Longitude / latitude data, d'autre part, peut être tracé simplement comme scatterplot avec x = longitude et y = latitude, sans aucun background maps (juste ne pas confondre x & y!). La première partie de ["Data wrangling visualisation and spatial analysis: R Workshop"](http://www.seascapemodels.org/data/data-wrangling-spatial-course.html) par C. Brown, D. Schoeman, A. Richardson, et B. Venables fournit une procédure détaillée de spatial exploratory data analysis avec copepod data (un type de zooplancton) en utilisant cette technique avec `ggplot2::geom_point()`. 
 
 Si on veut ajouter un fond d'ècran, il y a plusieurs options.  Le [tutorial](http://www.seascapemodels.org/data/data-wrangling-spatial-course.html) mentionné ci-dessus fournit des exemples en utilisant le **maps** ou **sf** packages. C'est une ressource hautement recommandée, car elle couvre une grande partie du pipeline de la science des données, du contexte du problème à l'obtention, la nettoyage et la transformation des données, l'exploration des données, et enfin la modélisation et la prévision.
 
