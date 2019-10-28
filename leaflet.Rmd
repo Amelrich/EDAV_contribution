@@ -1,22 +1,22 @@
 # Interactive Geographic Data {#leaflet}
 
 ![](images/banners/banner_leaflet.png)
-*This chapter originated as a community contribution created by [	AkhilPunia](https://github.com/AkhilPunia){target="_blank"}*
+*Ce chapitre est issu d'une contribution à la communauté crée par [	AkhilPunia](https://github.com/AkhilPunia){target="_blank"}*
 
-*This page is a work in progress. We appreciate any input you may have. If you would like to help improve this page, consider [contributing to our repo](contribute.html).*
+*Cette page est en cours de mise à jour. Nous apprécions toute remarque que vous puissiez avoir. Pour nous aider à améliorer cette page, vous pouvez [contributing to our repo](contribute.html).*
 
-## Overview
+## Vue d'ensemble
 
-You would have already seen different libraries that can help one in beautifully displaying geographic data like `ggmap` and `choroplethr`. Even though these libraries provide lots of interesting features to better express information through 2-dimensional graphs, they still lack one feature: interactivity. Here comes `leaflet`---a library written in javascript to handle interactive maps. Fun Fact: It's actively used by a lot of leading newspapers like The New York Times and The Washington Post. 
+Vous auriez déjà vu différents libraries qui peuvent vous aider à afficher des données géographiques telles que `ggmap` et` choroplethr`. Bien que ces libraries fournissent de nombreuses fonctionnalités intéressantes pour mieux exprimer les informations à travers les graphes 2-dimensional, ils manquent encore d’une caractéristique: l’interactivité. Voici le "leaflet" - un library écrit en javascript pour gérer les cartes interactives. Fait amusant: Il est activement utilisé par de nombreux grands journaux, tels que le New York Times et le Washington Post.
 
-Let's dive in.
+Plongeons dedans.
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Brief Description about Dataset
-For our analysis, we are using NYC Open Data about schools in New York City in 2016. [You can find more about it on the Kaggle page.](https://www.kaggle.com/passnyc/data-science-for-good/home){target="_blank"} We will be focusing on the the distribution of different variables as a factor of geographical positions.
+## Brève description du jeu de données
+Pour notre analyse, nous utilisons NYC Open Data décrivant les écoles en New York City en 2016. [Vous en trouverez plus sur la page Kaggle.](https://www.kaggle.com/passnyc/data-science-for-good/home){target="_blank"} Nous allons nous concentrer sur le distributions de différentes variables en tant que factor de positions géographiques.
 
 ```{r load library, eval=TRUE, message=FALSE}
 library(tidyverse)
@@ -28,7 +28,7 @@ schools <- read_csv('data/2016_school_explorer.csv')
 ```
 
 ## Plotting Markers
-Here we can see that all the Private schools in NYC have been plotted on a map that allows one to zoom in and out. The markers are used to denote the location of each individual school. If we hover over a marker, it displays the name of the school. Isn't that cool! 
+Ici, nous pouvons voir que toutes les écoles privées à New York ont été tracées sur une carte qui permet de zoomer et dézoomer. Les marqueurs sont utilisés pour indiquer l'emplacement de chaque école. Si nous survolons un marqueur, il affiche le nom de l'école. Trop cool!
 
 ```{r fig1-plot, echo=FALSE, warning=FALSE, message=FALSE, fig.height=6, fig.width=9}
 lat<-median(schools$Latitude)
@@ -42,7 +42,7 @@ schools %>%
   setView(lng=lon,lat=lat, zoom = 10)
 ```
 
-Here's the code for it:
+Voici le code pour cela:
 
 ```{r fig1, eval=FALSE, message=FALSE}
 lat<-median(schools$Latitude)
@@ -57,7 +57,7 @@ schools %>%
 ```
 
 ## Dynamic Heatmaps
-Heatmaps are really useful tools for visualizing the distribution of a particular variable over a certain region (they are so useful, [we got a page on 'em](heatmap.html)). In this example, we see how `leaflet` is able to dynamically calculate the number of schools in a given region from just latitude and longitude data. You can experience this by zooming in and out of the graph.
+Heatmaps sont des outils vraiment utiles pour visualiser la distribution d'une variable particulière sur une région donnée (ils sont si utiles, [nous avons une page sur eux](heatmap.html)). Dans cet exemple, nous voyons comment `leaflet` est capable de calculer dynamiquement le nombre d'écoles dans une région donnée à partir de données de latitude et de longitude uniquement. Vous pouvez en faire l'expérience en effectuant un zoom avant ou arrière du graphique.
 
 ```{r fig2-plot, echo=FALSE, warning=FALSE, message=FALSE, fig.height=6, fig.width=9}
 lat<-mean(schools$Latitude)
@@ -69,7 +69,7 @@ leaflet(schools) %>%
   setView(lng=lon,lat=lat, zoom = 10)
 ```
 
-Here's the code for it:
+Voici le code pour cela:
 
 ```{r fig2, eval=FALSE, message=FALSE}
 lat<-mean(schools$Latitude)
@@ -82,7 +82,7 @@ leaflet(schools) %>%
 ```
 
 ## Dynamic Clustering
-Here we can see how `leaflet` allows one to dynamically cluster data based on its geographic distance at a given zoom level.
+Nous pouvons voir ici comment `leaflet` permet de regrouper dynamiquement des données en fonction de leur distance géographique à un niveau de zoom donné.
 
 ```{r fig3-plot, echo=FALSE, warning=FALSE, message=FALSE, fig.height=6, fig.width=9}
 schools %>% 
@@ -92,7 +92,7 @@ schools %>%
                          clusterOptions = markerClusterOptions()) 
 ```
 
-Here's the code for it:
+Voici le code pour cela:
 
 ```{r fig3, eval=FALSE, message=FALSE}
 schools %>% 
@@ -124,7 +124,7 @@ top %>%
             opacity = 0.8)
 ```
 
-Here's the code for it:
+Voici le code pour cela:
 
 ```{r fig4, eval=FALSE, message=FALSE}
 top<- schools %>%
@@ -147,7 +147,7 @@ top %>%
 ```
 
 ## Plotting Categorical Data
-We can visualize the distribution of a particular class over the common map. This is achieved through an interactive widget provided on the top right that allows one to choose a particular category or multiple categories. The example below explores how schools in different neighborhoods are racially segregated.
+Nous pouvons visualiser la distribution d'une classe particulière sur la carte commune. Ceci est réalisé grâce à un widget interactif situé en haut à droite qui permet de choisir une catégorie particulière ou plusieurs catégories. L'exemple ci-dessous montre comment les écoles de différents quartiers sont ségréguées de manière raciale.
 
 ```{r fig5-plot, echo=FALSE, warning=FALSE, message=FALSE, fig.height=6, fig.width=9}
 ss <- schools %>% dplyr::select(`School Name`,Latitude, Longitude,`Percent White`, `Percent Black`, `Percent Asian`, `Percent Hispanic`)
@@ -199,7 +199,7 @@ m3 %>% addCircleMarkers(data = black, radius = 2, label = ~htmlEscape(`School Na
 
 ```
 
-Here's the code for it:
+Voici le code pour cela:
 
 ```{r fig5, eval=FALSE, message=FALSE}
 ss <- schools %>% dplyr::select(`School Name`,Latitude, Longitude,`Percent White`, `Percent Black`, `Percent Asian`, `Percent Hispanic`)
@@ -250,7 +250,7 @@ m3 %>% addCircleMarkers(data = black, radius = 2, label = ~htmlEscape(`School Na
         setView(lng=lng,lat=lat,zoom=10)
 ``` 
 
-These examples provide only a glimpse to what is truly possible with this library. If you want to explore more features and use-cases, check out the links listed below.
+Ces exemples ne donnent qu'un aperçu de ce qui est vraiment possible avec ce library. Si vous souhaitez explorer davantage de fonctionnalités et de cas d'utilisation, consultez les liens ci-dessous.
  
 ## External Resources 
 - [Leaflet in R Documentation](https://rstudio.github.io/leaflet/){target="_blank"}: main documentation of the package.
