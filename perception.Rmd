@@ -4,13 +4,13 @@
 
 ![](images/banners/banner_percept.png)
 
-## Overview
+## Vue d'ensemble
 
-This section has resources for learning about graphical perception and how to use colors effectively. 
+Cette section contient des ressources pour en savoir plus sur la perception graphique et sur l’utilisation efficace des couleurs. 
 
 ## Perception
 
-Here are some links to some key books/articles on perception:
+Voici quelques liens vers des ouvrages / articles clés sur la perception:
 
 - [Graphical Perception: Theory, Experimentation, and Application to the Development of Graphical Methods](https://www.jstor.org/stable/2288400){target="_blank"}: Classic article from William Cleveland and Robert McGill
 - [The Elements of Graphing Data](https://clio.columbia.edu/catalog/SCSB-8519758){target="_blank"}: Textbook by William Cleveland
@@ -18,17 +18,17 @@ Here are some links to some key books/articles on perception:
 Visualizing Data](https://clio.columbia.edu/catalog/SCSB-1389825){target="_blank"}: Textbook by William Cleveland
 - [Creating More Effective Graphs](https://clio.columbia.edu/catalog/5291007){target="_blank"}: Textbook by Naomi Robbins
 
-## Color
+## Couleur
 
-Color is very subjective. It is important to choose the right ones so that your work is easy to understand.
+La couleur est très subjective. Il est important de choisir les bons pour que votre travail soit facile à comprendre.
 
-- [Color Brewer](http://colorbrewer2.org/){target="_blank"}: Excellent resource for getting effective color palettes for different projects. Its main focus is on cartography, but it is super useful for any project involving color. You can choose between different types of data (sequential, diverging, qualitative), ensure your chosen palette is effective for colorblind users (or print friendly or photocopy safe), and easily export the color palette to different formats (Adobe, GIMP/Inkscape, JS, CSS). The best go-to for effective color palettes. 
-- [Color Blindness Simulator](http://colorbrewer2.org/){target="_blank"}: Not sure how effective your project will be to a colorblind user? This tool can help. You can upload an image to see how it will look with different color vision handicaps.
-- [ColorPick Eyedropper](https://chrome.google.com/webstore/detail/colorpick-eyedropper/ohcpnigalekghcmgcdcenkpelffpdolg?hl=en){target="_blank"}: This Chrome extension allows you to copy hex color values from webpages. Simple and intuitive, it will make creating your awesome color palettes a lot easier.
+- [Color Brewer](http://colorbrewer2.org/){target="_blank"}: Excellente ressource pour obtenir des palettes de couleurs efficaces pour différents projets. Son objectif principal est la cartographie, mais il est extrêmement utile pour tout projet impliquant la couleur. Vous pouvez choisir entre différents types de données (sequential, diverging, qualitative), vous assurer que la palette choisie est efficace pour les utilisateurs daltoniens (ou permettre une impression simplifiée ou une photocopie sûre), et exporter facilement la palette de couleurs dans différents formats (Adobe, GIMP / Inkscape, JS, CSS). Le meilleur choix pour des palettes de couleurs efficaces.
+- [Color Blindness Simulator](http://colorbrewer2.org/){target="_blank"}: Vous ne savez pas quelle sera l'efficacité de votre projet pour un utilisateur daltonien? Cet outil peut aider. Vous pouvez télécharger une image pour voir son apparence avec différents handicaps liés à la vision des couleurs.
+- [ColorPick Eyedropper](https://chrome.google.com/webstore/detail/colorpick-eyedropper/ohcpnigalekghcmgcdcenkpelffpdolg?hl=en){target="_blank"}: Cette extension Chrome vous permet de copier des valeurs de couleur hex à partir de pages Web. Simple et intuitif, il sera beaucoup plus facile de créer vos superbes palettes de couleurs.
 
-## Quick tips on using color with `ggplot2`
+## Astuces pour utiliser les couleurs avec `ggplot2`
 
-One of the most common problems is confusing `color` and `fill`. `geom_point()` and `geom_line` use `color`, many of the other geoms use `fill`. Some use both, such as `geom_tile()` in which case `color` is the border color and `fill` is the fill color.
+L'un des problèmes les plus courants est la confusion entre `color` et `fill`. `geom_point()` et `geom_line` utilisent `color`, de nombreux autres pays utilisent `fill`. Certains utilisent les deux, tels que `geom_tile()`, auquel cas `color` est la couleur de la bordure et `fill` est la couleur de remplissage.
 
 ### Continuous data
 
