@@ -90,9 +90,9 @@ Parfois, les graphiques à coordonnées parallèles sont utiles pour les séries
 ## Considerations
 
 ### Quand utiliser le clustering? 
-En général, on utilise le clustering quand on veut observer un motif récurrent dans une série de cas avec des propriétés spécifiques. Ceci peut diviser les variables en clusters selon leur valeur spécifique pour une valeur de variable catégorique particulière. But you can even use a continuous variable; for example, dividing all cases into two sections based on some continuous variable *height*: those who have a height greater than 150cm and those who do not. 
+En général, on utilise le clustering quand on veut observer un motif récurrent dans des données catégoriques avec des propriétés spécifiques. On divise les variables en clusters selon leur valeur spécifique pour une certaine variable catégorique. On peut également utiliser une variable continue; en la transformant en variable catégorique. Par exemple, en divisant les valeurs possibles selons deux cas: pour une variable continue *taille*: on divise en ceux dont la taille est supérieure à 150cm et ceux pour lesquels ça n'est pas le cas. 
 
-Let us look at an example using our iris dataset, clustering on the "Species" column:
+Regardons un exemple avec le dataset iris, en clusterisant la colonne "Species":
 
 ```{r iris-clustering, message=FALSE}
 library(GGally)
@@ -102,10 +102,11 @@ graph<-ggparcoord(iris, columns=1:4, groupColumn = 5, title = "Plot for Iris dat
 graph
 ```
 
-### Deciding the value of alpha
-In practice, parallel coordinate plots are not going to be used for very small datasets. Your data will likely have thousands and thousands of cases, and sometimes it can get very difficult to observe anything when so many of your cases will overlap. So we set the *aplhaLines* parameter to a value between zero and one, and it reduces the opacity of all lines so that you can get a clearer view of what is going on if you have too many overlapping cases. 
+### Choix du paramètre alpha
+En pratique, les graphiques à coordonnées parallèles ne sont pas utiles pour des petits jeux de données. Il est plus probable que vos données soient constituées de milliers de cas différents, et il est parfois difficile d'interpréter un graphique à coordonnées parallèles quand autant de cas se recoupent. Pour résoudre ce problème, on définit le paramètre *alphalines* avec une valeur entre 0 et 1. Ce paramètre réduit l'opacité des lignes pour qu'on puisse mieux comprendre ce qui se passe quand beaucoup de cas se recoupent.
 
-Again we use our iris data, but reduce alpha to 0.5. Observe how much easier it is now to trace the course of every case:
+On utilise à nouveau le jeu de données iris, mais en réduisant le paramètre alpha à 0.5. Regardez comme il est beaucoup plus facile de suivre le cours de chaque cas:
+
 
 ```{r iris-alpha, message=FALSE}
 library(ggplot2)
@@ -115,18 +116,18 @@ ggparcoord(iris, columns=1:4, groupColumn = 5, alphaLines = 0.5, title = "Iris d
 ```
 
 ### Scales
-When we use ggparcoord(), we have an option to set the *scale* attribute, which will scale all variables so we can compare their values. 
+Quand on utilise ggparcoord(), on peut définir l'attribut *scale*, qui met à la même échelle toutes les variables pour qu'on puisse comparer leurs valeurs simplement.
 
-The different types of scales are as follows: 
+Les différents types d'échelle sont:
 
-1. **std**: default value, where it subtracts mean and divides by SD
-2. **robust**: subtract median and divide by median absolute deviation
-3. **uniminmax**: scale all values so that the minimum is at 0 and maximum at 1
-4. **globalminmax**: no scaling, original values taken
-5. **center**: centers each variable according to the value given in *scaleSummary*
-6. **centerObs**: centers each variable according to the value of the observation given in *centerObsID* 
+1. **std**: valeur par défaut, on soustrait la moyenne et on divise par l'écart-type
+2. **robust**: on soustrait la mediane et on devise par l'ecart absolu de la médiane (median absolute deviation)
+3. **uniminmax**: on met à l'échelle toutes les valeurs pour que le minimum soit à 0 et le maximum à 1
+4. **globalminmax**: pas de mise à l'échelle, on garde les valeurs d'origine
+5. **center**: On centre chaque variable selon sa valeur donnée par *scaleSummary*
+6. **centerObs**: on centre chaque variable selon sa valeur donnée par *centerObsID* 
 
-Let us create a sample dataset and see how values on the y-axis change for different scales:
+Créons un échantillon de données et observons comment les valeurs sur l'axe des y changent pour chaque échelle:
 
 ```{r scales-example, message=FALSE}
 library(ggplot2)
@@ -146,22 +147,22 @@ g6<-ggparcoord(df1, columns=1:2, scale = "centerObs", centerObsID = 4, title = "
 grid.arrange(g1, g2, g3, g4, g5, g6, nrow=2)
 ```
 
-### Order of the variables 
-Deciding the order of the variables on the y-axis depends on your application. It can be specified using the *order* parameter. 
+### Ordre des variables 
+Le choix de l'ordre des variables sur l'axe des y dépend de l'application. Il peut être spécifié avec le paramètre *order*.
 
-The different types of order are as follows: 
+Les différents types d'ordre sont:
 
-1. **default**: the order in which we add our variables to the *column* attribute
-2. **given vector**: providing a vector of the order we need (used most frequently)
-3. **anyClass**: order based on the separation of a variable from the rest (F-statistic - each variable v/s the rest)
-4. **allClass**: order based on the variation between classes (F-statistic - group column v/s the rest)
-5. **skewness**: order from most to least skewed
-6. **Outlying**: order based on the *Outlying* measure
+1. **default**: l'ordre dans lequel nous ajoutons nos variables à l'attribut *column*
+2. **given vector**: on donne un vecteur contenant l'ordre dont on a besoin (cas le plus fréquent)
+3. **anyClass**: l'ordre basé sur la séparation d'une variable des autres (F-statistic - chaque variable v/s le reste)
+4. **allClass**: l'ordre basé sur la variation entre les classes (F-statistic - groupe column v/s le reste)
+5. **skewness**: l'ordre du plus au moins dévié (skewed)
+6. **Outlying**: l'orre basé sur la valeur de *Outlying* 
 
 ## Modifications
 
-### Flipping the coordinates
-A good idea if we have too many variables and their names are overlapping on the x-axis:
+### Permutation des coordonnées
+C'est une bonne idée quand on a trop de variables et que leurs noms se chevauchent sur l'axe des x:
 
 ```{r iris-flip, message=FALSE}
 library(ggplot2)
@@ -172,8 +173,8 @@ library(GGally)
 graph + coord_flip()
 ```
 
-### Highlighting trends
-Let us see what trend the versicolor Species of the iris dataset follows over the other variables:
+### Faire appparaître des tendances
+Voyons quelle tendance suit l'espèce Versicolor du jeu de données iris par rapport aux autres variables:
 
 ```{r iris-trends, message=FALSE}
 library(ggplot2)
@@ -186,8 +187,8 @@ ggparcoord(ds_versi[order(ds_versi$versicolor),], columns = 1:4, groupColumn = "
   scale_color_manual(values=c("gray","maroon"))
 ```
 
-### Using splines 
-Generally, we use splines if we have a column where there are a lot of repeating values, which adds a lot of noise. The case lines become more and more curved when we set a higher spline factor, which removes noise and makes for easier observations of trends. It can be set using the *splineFactor* attribute:
+### Utilisation de splines 
+En général, one utilise les splines quand on a une colonne dans laquelle beaucoup de valeurs se répètent, ce qui ajoute beaucoup de bruit. Les lignes de spline deviennent de plus en plus incurvées quand on choisit un facteur spline élevé, ce qui retire du bruit et rend l'observation de tendances plus facile. Il peut être défini en utilisant l'attribut *splineFactor* :
 
 ```{r spline-example, message=FALSE}
 library(ggplot2)
@@ -206,18 +207,19 @@ g8<-ggparcoord(df2, columns = 1:4, scale = "globalminmax", splineFactor=10, titl
 grid.arrange(g7,g8)
 ```
 
-### Adding boxplots to the graph
+### Ajout de boxplot au graphique
 You can add boxplots to your graph, which can be useful for observing the trend of median values. Generally, they are added to data with a lot of variables - for example, if we plot time series data.
+Vous pouvez ajouter des boxplots à votre graphique. C'est utile pour observer la tendance de la médiane des valeurs. En général, on les ajoute aux données avec beaucoup de variables - par exemple, les séries temporelles.
 
-## Other Packages
-There are a number of packages that have functions for creating parallel coordinate plots: [to do: add links]
+## Autres Packages
+Il y a une multitude d'autres packages qui ont des fonctions pour créer des graphiques à coordonnées parallèles: [à faire: ajouter des liens]
 
-- [`parcoords::parcoords()`](https://CRAN.R-project.org/package=parcoords) -- great interactive option 
-- `ggplot2::geom_line()` -- not specific to parallel coordinate plots but easy to create with the `group=` parameter.
+- [`parcoords::parcoords()`](https://CRAN.R-project.org/package=parcoords) -- une bonne solution interactive 
+- `ggplot2::geom_line()` -- n'est pas propre aux graphiques à coordonnées parallèles, mais sont faciles à créer avec le paramètre `group=`.
 - `lattice::parallelplot()`
 - `MASS::parcoord()`
 
-## External Resources 
-- [Introduction to parallel coordinate plots](https://www.rdocumentation.org/packages/GGally/versions/1.4.0/topics/ggparcoord){target="_blank"}: An excellent resource giving details of all attributes and possible values. Also has some good examples. 
-- [How to create interactive parallel coordinate plots](https://plot.ly/r/parallel-coordinates-plot/){target="_blank"}: a nice walkthrough on using plotly to create an interactive parallel coordinate plot.
-- [Different methods to create parallel coordinate plots](https://www.r-bloggers.com/parallel-coordinate-plots-for-discrete-and-categorical-data-in-r-a-comparison/){target="_blank"}: This is specifically when we have categorical variables.
+## Ressources Externes 
+- [Introduction to parallel coordinate plots](https://www.rdocumentation.org/packages/GGally/versions/1.4.0/topics/ggparcoord){target="_blank"}: Très bonne ressource qui donne des détails pour chaque attribut et chaque valeur possible. Possède de bons exemples.
+- [How to create interactive parallel coordinate plots](https://plot.ly/r/parallel-coordinates-plot/){target="_blank"}: explique bien comment utiliser plotly pour créer un diagramme à coordonnées parallèles interactif.
+- [Different methods to create parallel coordinate plots](https://www.r-bloggers.com/parallel-coordinate-plots-for-discrete-and-categorical-data-in-r-a-comparison/){target="_blank"}: Uniquement quand on a des variables categoriques.
