@@ -1,15 +1,16 @@
 # Interactive Geographic Data {#leaflet}
 
 ![](images/banners/banner_leaflet.png)
-*Ce chapitre est issu d'une contribution à la communauté crée par [	AkhilPunia](https://github.com/AkhilPunia){target="_blank"}*
+*Ce chapitre est à l'origine une contribution communautaire de [AkhilPunia](https://github.com/AkhilPunia){target="_blank"}*
 
-*Cette page est en cours de mise à jour. Nous apprécions toute remarque que vous puissiez avoir. Pour nous aider à améliorer cette page, vous pouvez [contributing to our repo](contribute.html).*
+*En cours de progression. Toute amélioration est la bienvenue. Si vous souhaitez participer rendez vous sur [contribuer au repo](contribute.html).*
+
 
 ## Vue d'ensemble
 
-Vous auriez déjà vu différents libraries qui peuvent vous aider à afficher des données géographiques telles que `ggmap` et` choroplethr`. Bien que ces libraries fournissent de nombreuses fonctionnalités intéressantes pour mieux exprimer les informations à travers les graphes 2-dimensional, ils manquent encore d’une caractéristique: l’interactivité. Voici le "leaflet" - un library écrit en javascript pour gérer les cartes interactives. Fait amusant: Il est activement utilisé par de nombreux grands journaux, tels que le New York Times et le Washington Post.
+Vous connaissez certainement différentes libraries qui peuvent vous aider à afficher des données géographiques telles que `ggmap` et` choroplethr`. Bien que ces libraries fournissent de nombreuses fonctionnalités intéressantes pour mieux présenter les informations avec des graphes 2D, ils leur manquent encore une caractéristique importante : l’interactivité. Voici "leaflet" - une librairie écrit en javascript pour gérer les cartes interactives. Fait amusant : il est activement utilisé par de nombreux grands journaux, tels que le New York Times ou le Washington Post.
 
-Plongeons dedans.
+Plongeons nous dedans.
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
