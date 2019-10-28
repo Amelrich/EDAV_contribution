@@ -1,19 +1,19 @@
-# Time Series {#timeseriesbasic}
+# Séries temporelles {#timeseriesbasic}
 
 ![](images/banners/banner_timeseriesbasic.png)
-*This chapter originated as a community contribution created by [	HaiqingXu](https://github.com/xhqkatrina){target="_blank"}*
+*Ce chapitre a été réalisé dans le cadre d'une collaboration communautaire créée par [HaiqingXu](https://github.com/xhqkatrina){target="_blank"}*
 
-*This page is a work in progress. We appreciate any input you may have. If you would like to help improve this page, consider [contributing to our repo](contribute.html).*
+*Cette page est un travail en cours. Nous apprécions tout commentaire ou feedback. Si vous voulez nous aider à améliorer cette page, vous pouvez [contribuer à notre repo](contribute.html).*
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Overview
-This section discusses drawing graphics for time series data.
+## Vue d'ensemble
+Cette section présente les graphiques qui peuvent être utilisés pour représenter des séries temporelles. 
 
-## Single/Multiple Time Series
-We can draw time series using **geom_line()** with time on the x-axis. X-axis should be an object in the [Date class](dates.html), assuming there is no hour/minute/second data.
+## Séries temporelles simples/multiples
+On peut représenter les séries temporelles en utilisant  **geom_line()** avec le temps représenté sur l'axe x. Cet axe doit être un objet de la [classe Date](dates.html), sous l'hypothèse qu'il n'y a pas de données pour les heures/minutes/secondes.
 ```{r, message = FALSE, warning = FALSE}
 library(tidyverse)
 
@@ -23,7 +23,7 @@ ggplot(data = economics, aes(x = date, y = pop))+
   labs(x = "year", y = "population")
 ```
 
-We can also draw multiple time series on one plot for comparison purpose:
+Nous pouvons également représenter plusieurs séries temporelles sur un même graphique pour pouvoir les comparer.
 
 ```{r}
 
@@ -40,8 +40,7 @@ g <- ggplot(df, aes(DATE, RATE, color = TYPE)) + geom_line() +
 g
 ```
 
-
-The following exmaple shows the closing price for four big technology companies in the US. When analyzing GDP, salary level and stock prices, it is often difficult to compare trends since the scales are so different. For example, since AAPL and MSFT prices per share are so much lower than GOOG's price per share, it's hard to discern the trends:
+L'exemple suivant représente le prix de clôture pour quatre grandes entreprises tech aux Etats-Unis. Lorsque l'on analyse le GDP, niveau de salaire et prix des actions, il est parfois difficile de comparer des tendances puisque les échelles sont totalement différentes. Par exemple, puisque les prix par action de AAPL et MSFT sont tellement basses comparées au prix par action de GOOG, il est difficile de discerner des tendances dans les données:
 
 ```{r, message = FALSE, warning = FALSE}
 library(tidyquant)
@@ -55,7 +54,7 @@ ggplot(df, aes(date, y = close,
   theme(legend.title = element_blank())
 ```
 
-In such a case, it can be helpful to rescale the data. We rescaled the data to make sure these four stocks have a price of 100 on Jan 2013:
+Dans ce cas-là, il peut être utile de redimensionner les données. On peut faire ceci de façon à ce que chaque prix par action pour chacune de ces entreprises ait un prix de 100 en janvier 2013.
 
 ```{r}
 df <- df %>% group_by(symbol) %>% 
@@ -70,8 +69,9 @@ ggplot(df, aes(date, y = rescaled_close,
 
 
 
-## Secular Trend
-Instead of looking at observations over time, we often want to ovserve overall long-term trend in our time series data. In this case, we can use geom_smooth(). Here we will show secular trend using the [Loess Smoother](https://en.wikipedia.org/wiki/Local_regression){target="_blank"}.
+## Tendance générale
+Au lieu de regarder les observations dans le temps, on veut souvent connaître la tendance générale à long terme de nos séries temporelles. Dans ce cas-ci, on peut utiliser geom_smooth(). On utilisera le [lissage Loess](https://en.wikipedia.org/wiki/Local_regression){target="_blank"}.
+
 ```{r}
 AAPL <- df %>% filter(symbol == "AAPL")
 
@@ -83,13 +83,14 @@ g + geom_line(color = "grey50") +
     labs(x = "Date", y = "Price")
 ```
 
-Experiment with different smoothing parameters.
+Une expérience avec différents paramètres de lissage:
 ```{r}
 g + geom_smooth(method = "loess", span = .5, se = FALSE)
 ```
 
-## Seasonal Trends
-In addition to secular trends, there are also seasonal trends in time series data. One way is to visualize seasonal trends is to use fact on season(day of month, day of week etc.).
+## Tendance saisonnière
+En plus de la tendance générale, il y a aussi des tendances saisonnières dans les séries temporelles. Une façon de les visualiser est d'utiliser des faits de saison (jour du mois, jour de la semaine, etc.)
+
 ```{r, message = FALSE}
 library(lubridate)
 dfman <- read_csv("data/ManchesterByTheSea.csv")
@@ -98,13 +99,14 @@ ggplot(dfman, aes(Date, Gross)) +
   facet_grid(wday(Date, label = TRUE)~.)
 ```
 
-Or, let us create a monthly plot.
+Ou, on peut créer un graphique qui montre le résultat pour chaque mois.
 ```{r}
 monthplot(AirPassengers)
 ```
 
-## Frequency of Data
-What if you want to observe the frequency of time series data? A simple answer: use **geom_point()** in addition to **geom_line()**.
+## Fréquence des données
+Et si on voulait observer la fréquence des séries temporelles? Facile: utilisez **geom_point()** en plus de **geom_line()**.
+
 ```{r, message = FALSE}
 # read file
 mydat <- read_csv("data/WA_Sales_Products_2012-14.csv") %>% 
@@ -130,7 +132,8 @@ g <- ggplot(Methoddata, aes(Date, Revenue,
 g + geom_point()
 ```
 
-There could be NA values in time series data. Using **geom_point()** with **geom_line()** is one way to detect missing values. Here we introduce another option: leave gaps.
+C'est possible qu'il y ait des valeurs manquantes dans les séries temporelles. Utiliser **geom_point()** avec **geom_line()** est une façon de les détecter. Ici nous introduisons une méthode alternative: laisser des gaps. 
+
 ```{r}
 Methoddata$Date[year(Methoddata$Date)==2013] <- NA
 g <- ggplot(Methoddata, aes(Date, Revenue,
