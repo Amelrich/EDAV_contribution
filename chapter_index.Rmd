@@ -3,11 +3,11 @@
 ![](images/banners/banner_chapter_index.png)
 
 <!-- toc -->
-## Overview
-This page includes links to every chapter in *edav.info/*
+## Vue d'ensemble
+Cette page contient des liens vers tous les chapitres de *edav.info/*
 
-- Click on a banner to go to the desired page.
-- If you're wondering, here's an [explanation of what the banner colors mean](intro.html#how-this-resource-is-structured).
+- Cliquez sur une bannière pour aller à la page souhaitée.
+- Si vous vous demandez, voici un [explication de la signification des couleurs de la bannière](intro.html#how-this-resource-is-structured).
 
 ## Index
 <!-- [![Header](images/banners/banner_TITLE.png)](TITLE.html){class="active-banner"} -->
