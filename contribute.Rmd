@@ -1,38 +1,39 @@
-# Contribute to this Resource {#contribute}
+# Contribuez à cette ressour e {#contribute}
 
 ![](images/banners/banner_contribute.png)
 
-## Why contribute?
+## Pourquoi contribuer?
 
-We don't want *edav.info/* to be just another resource. Rather, we want it to be *your* resource. If there are things that trip you up or cause you frustration, chances are you're not alone. Everyone comes to this course with different backgrounds and expertise. Being able to collect all that knowledge in one place is this resource's mission and you can help move that mission forward.
+Nous ne voulons pas qu'*edav.info/* devienne juste une autre ressource. Nous voulons qu'edav.info devienne *votre* ressource. Si vous bloquez sur quelquechose, il y a de grandes chances que vous ne soyez pas seul.  Tout le monde commence ce cours avec un parcours et des compétences différentes. L'objectif de cette ressource est de collecter toutes ces connaissances et de les regrouper au même endroit, et vous pouvez nous aider à réaliser cette mission.
 
-## What to contribute
+## Que contribuer?
 
-The focus of edav.info is the coding aspect of data visualization using R.  It is not meant to substitute for course lectures or provide much theory about exploratory data analysis and visualization.  We want to make it easy for students to find what they need quickly to produce a particular kind of graph. We are open to a wide range of contributions but we do have some ground rules:
+L'intérêt premier de edav.info est d'étudier l'aspect "programmation" de la data visualization avec R. Edav.info n'a pas vocation à être un substitut pour le cours, ou d'étudier la théorie de l'analyse de données et la visualisation. Nous voulons tout simplement permettre aux étudiants de trouver ce qu'ils cherchent quand ils veulent créer un certain type de graphique vite. Nous sommes ouvert à différents types de contributions, mais nous avons quelques règles:
 
-* We are happy to receive *original work* that will help someone else. For example, if you worked out how to use a function that is not documented well, or mastered a type of graph that was difficult to get right, please share! On the other hand, if good tutorials already exist, there's no need to repeat the work.  Just submit a link to the resource with a short description to the appropriate chapter.
+* Nous acceptons volontiers des *travaux originaux* qui aideront les élèves. Par exemple, si vous avez compris comment utiliser une fonction mal documentée, ou que vous avez maîtrisé un certain type de graphique difficile à comprendre, partagez ces informations! Néanmoins, si un bon manuel existe quelque part, ça ne sert à rien de répéter le travail. Donnez-nous juste un lien vers la ressource avec une petite description.
 
-* And of course don't forget to cite your sources by providing links. 
+* Et bien entendu, n'oubliez jamais de citer vos sources en donnant des liens.
 
-## Ways to contribute
+## Comment contribuer
 
-There are many ways you can contribute:
+Il y a beaucoup de manières de contribuer:
 
-- <i class="fas fa-exclamation-circle"></i> For **large or small ideas, without providing the code** <i class="fas fa-arrow-right"></i> [**submit an issue**](#submit-an-issue) (very simple, much appreciated)
+- <i class="fas fa-exclamation-circle"></i> Pour **des grandes ou petites idées, sans écrire de code** <i class="fas fa-arrow-right"></i> [**Soumettez une "issue"**](#submit-an-issue) (très simple, bien apprécié)
 
-- <i class="fas fa-edit"></i> For **simple changes** <i class="fas fa-arrow-right"></i> [**contribute on GitHub**](#github-only-walkthrough) (this can all be done on **GitHub.com**... we've got a full walkthrough explaining how)
+- <i class="fas fa-edit"></i> Pour **des changements simples** <i class="fas fa-arrow-right"></i> [**contribuez sur GitHub**](#github-only-walkthrough) (ceci peut être fait sur **GitHub.com**... nous avons un tutoriel qui explique comment faire)
 
-- <i class="fas fa-code-branch"></i> For **more complex changes** <i class="fas fa-arrow-right"></i> install Git and and work locally. Detailed instructions can be found in our [Git/GitHub Resources chapter](github.html) (the next level, also much appreciated) -- adventurous users may solve [**an open issue**](https://github.com/jtr13/EDAV/issues) (more advanced/open-ended)
+- <i class="fas fa-code-branch"></i> Pour **des changements plus complexes** <i class="fas fa-arrow-right"></i> installez Git et travaillez localement. Des instructions détaillées sont sur notre [Git/GitHub chapitre Ressources](github.html) (le niveau au-dessus, aussi bien apprécié) -- les utilisateurs les plus aventureux pourront résoudre [**une "issue" non-resolue**](https://github.com/jtr13/EDAV/issues) (plus avancé/ouvert)
 
-## Submit an issue
+## Soumettez une "issue"
 
-If your proposed change is more complex, consider letting us know by **submitting an issue**. Maybe you have a great idea for a brand new chapter, something we have not covered but would like to see here in this resource (a new chart page, say; or a walkthrough using a specific tool/package). It may be a little too complicated to [contribute directly](#contribute-directly). What to do? Submit an issue, of course! 
+Si le changement que vous voulez faire est compliqué, prévenez-nous en **soumettant une "issue"** . Vous avez peut-être une super idée pour un nouveau chapitre, quelquechose que nous n'avons pas couvert, mais que vous aimeriez voir présent ici dans cette ressource (une nouvelle page sur un graphique; un tutoriel pour utiliser un outil/package particulier). Il peut être un peu trop compliqué de [contribuer directement](#contribute-directly). La solution? Soumettez une "issue" bien entendu! 
 
-[Issues](https://guides.github.com/features/issues/){target="_blank"} are tasks you can post to a GitHub repo that people can then take on and fix. They can be small ("this link is broken" / "add this resource") or complex ("I would love to have a chapter on..." / "reformat this code chunk in this way"). Once posted, issues can be taken on by anyone.
+[Les "issues"](https://guides.github.com/features/issues/){target="_blank"} sont des tâches que vous pouvez poster sur un dépôt GitHub et que d'autres personnes peuvent tenter de résoudre? Elles peuvent être petites ("ce lien est cassé"/"ajoutez cette ressource") ou complexes ("J'aimerais proposer un chapitre sur ..." / "Il faut reformater ce bloc de code de cette façon"). Une fois postée l'issue peut être traitée par n'importe qui.
 
-You do *not* have to know how to code up your issue; from fixing a bug to proposing a resource we should link to, we appreciate any feedback you have and will take it all into consideration.
 
-**How to submit issues**:
+Vous n'avez *pas* à savoir coder pour soumettre votre issue; corriger un bug tout comme proposer une nouvelle ressource que nous devrions mentionnes, nous apprécions tout retour que vous puissiez avoir.
+
+**Comment soumetre des "issues"**:
 
 1. Go to [our GitHub repo](https://github.com/jtr13/EDAV){target="_blank"} and click on the [Issues Tab](https://github.com/jtr13/EDAV/issues){target="_blank"}
 2. Click on "[New Issue](https://github.com/jtr13/EDAV/issues/new){target="_blank"}"
