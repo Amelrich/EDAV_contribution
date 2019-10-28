@@ -1,20 +1,19 @@
 # Chart: Parallel Coordinate Plots {#parallelcoordinates}
 
 ![](images/banners/banner_parallel_coordinates.png)
-*This chapter originated as a community contribution created by [	aashnakanuga](https://github.com/aashnakanuga){target="_blank"}*
+*Ce chapitre était initialement une contribution à la communauté de  [aashnakanuga](https://github.com/aashnakanuga){target="_blank"}*
 
+## Vue d'ensemble
 
-## Overview
+Cette secion couvre comment créer des graphiques à coordonnées parallèles statiques avec le package `GGally`.
 
-This section covers how to create static parallel coordinate plots with the `GGally` package.
-
-For interactive parallel coordinate plots, check out the [parcoords](https://cran.r-project.org/package=parcoords){target="_blank"} package. The [package vignette](https://cran.r-project.org/web/packages/parcoords/vignettes/introduction-to-parcoords-.html) provides instructions on using this package.
+Pour des graphiques à coordonnées parallèles interactifs, voir le package [parcoords](https://cran.r-project.org/package=parcoords){target="_blank"} . Le [package vignette](https://cran.r-project.org/web/packages/parcoords/vignettes/introduction-to-parcoords-.html) donne des instructions pour l'utilisation de ce package.
 
 ## tl;dr
-I want a Fancy Example! Not tomorrow, not after breakfast, NOW!
+Je veux un bel example! Pas demain, pas après le petit déjeuner, MAINTENANT!
 
 <!-- Explanation: -->
-Here's a look at the effect of different attributes on each Fair cut diamond from the "diamonds" dataset:
+Observons l'effet des différents attributs sur chaque coupe "Fair" de diamond du jeu de données "diamonds":
 
 ```{r tldr-show-plot, echo=FALSE, warning=FALSE, message=FALSE, fig.height=6, fig.width=9}
 library(GGally)
@@ -36,7 +35,7 @@ ggparcoord(ds_fair[order(ds_fair$diamond_cut, decreasing=TRUE),], columns=c(1,5,
   scale_color_manual(values=c("maroon","gray"))
 ```
 
-And here's the code:
+Et voici le code:
 ```{r tldr-code, eval=FALSE, message=FALSE}
 library(GGally)
 library(dplyr)
@@ -56,13 +55,13 @@ ggparcoord(ds_fair[order(ds_fair$diamond_cut, decreasing=TRUE),], columns=c(1,5,
            title = "Parallel Coordinate Plot showing trends for Fair cut diamonds", scale = "uniminmax") +
   scale_color_manual(values=c("maroon","gray"))
 ```
-For more information about the dataset, type `?diamonds` into the console.  
+Pour plus d'informations sur ce jeu de données, tapez `?diamonds` dans la console.  
 
-## Simple examples 
+## Examples simples
 
-Woah woah woah! Too complicated! *Much* simpler, please. 
+Du calme! Trop compliqué! *Beacoup* plus facile, s'il-vous-plaît. 
 
-Let us use the popular "iris" dataset for this example:
+Utilisons le jeu de données "iris" pour cet exemple:
 
 ```{r simple-example-iris, message=FALSE}
 library(datasets)
@@ -71,27 +70,27 @@ library(GGally)
 ggparcoord(iris, columns=1:4, title = "Parallel coordinate plot for Iris flowers")
 ```
 
-For more information about the dataset, type `?iris` into the console.  
+Pour plus d'informations sur ce jeu de données, tapez `?iris` dans la console.  
 
-## Theory
+## Theorie
 
-For more info about parallel coordinate plots and multivariate continuous data, check out [Chapter 6](http://www.gradaanwr.net/content/ch06/){target="_blank"} of the textbook. 
+Pour plus d'informations sur les graphiques à coordonnées parallèles et les données continues multivariées, regarder le [Chapitre 6](http://www.gradaanwr.net/content/ch06/){target="_blank"} du livre de cours. 
 
 
-## When to use 
+## Quand les utiliser 
 
-Generally, parallel coordinate plots are used to infer relationships between multiple continuous variables - we mostly use them to detect a general *trend* that our data follows, and also the specific cases that are *outliers*. 
+En général, les graphiques à coordonnées parallèles sont utilisés pour déduire des liens entre plusieurs variables continues  - onles utilise en général pour detecter une *tendance* que nos données suivent, et les cas particuliers que sont les Generally, parallel coordinate plots are used to infer relationships between multiple continuous variables - we mostly use them to detect a general *trend* that our data follows, and also the specific cases that are *valeurs aberrantes* (outliers). 
 
-Please keep in mind that parallel coordinate plots are not the ideal graph to use when there are just categorical variables involved. We can include a few categorical variables in our axes or for the sake of clustering, but using a lot of categorical variables results in overlapping profiles, which makes it difficult to interpret. 
+Veuillez garder à l'esprit que les graphiques à coordonnées parallèles ne sont pas idéaux quand il n'y a que des données catégoriques. Nous pouvons inclure quelques variables catégoriques de nos axes dans un souci de clustering, mais utiliser beaucoup de variables catégorique cause une saturation du graphique, ce qui le rend moins interprétable.
 
-We can also use parallel coordinate plots to identify trends in specific clusters - just highlight each cluster in a different color using the `groupColumn` attribute of `ggparcoord()` to specify your column, and you are good to go! 
+Nous utilisons aussi les graphiques à coordonnées parallèles pour identifier les tendances dans des clusters particuliers -  pour illustrer chaque cluster dans une couleur différente, utiliser l'attribut `groupColumn` de `ggparcoord()`, specifiez votre colonne, et c'est parti!
 
-Sometimes, parallel coordinate plots are very helpful in graphing time series data - where we have information stored at regular time intervals. Each vertical axis will now become a time point and we need to pass that column in `ggparcoord`'s "column" attribute.
+Parfois, les graphiques à coordonnées parallèles sont utiles pour les séries temporelles - quand nous avons des informations enregistrées à des intervalles de temps réguliers. Chaque axe vertical sera desormais un point temporel et nous passerons cette colonne en attribut "column" pour `ggparcoord`.
 
 ## Considerations
 
-### When do I use clustering? 
-Generally, you use clustering when you want to observe a pattern in a set of cases with some specific properties. This may include divvying up all variables into clusters based on their value for a specific categorical variable. But you can even use a continuous variable; for example, dividing all cases into two sections based on some continuous variable *height*: those who have a height greater than 150cm and those who do not. 
+### Quand utiliser le clustering? 
+En général, on utilise le clustering quand on veut observer un motif récurrent dans une série de cas avec des propriétés spécifiques. Ceci peut diviser les variables en clusters selon leur valeur spécifique pour une valeur de variable catégorique particulière. But you can even use a continuous variable; for example, dividing all cases into two sections based on some continuous variable *height*: those who have a height greater than 150cm and those who do not. 
 
 Let us look at an example using our iris dataset, clustering on the "Species" column:
 
