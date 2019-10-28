@@ -1,9 +1,9 @@
-# Walkthrough: Tidy Data & dplyr {#tidy}
+# Revue détaillée : Tidy Data & dplyr {#tidy}
 
 ![](images/banners/banner_tidy_data_dplyr.png)
-*Ce chapitre a pour origine une contribution communautaire créée par [akshatapatel](https://github.com/akshatapatel){target="_blank"}*
+*Ce chapitre est à l'origine une contribution communautaire de [akshatapatel](https://github.com/akshatapatel){target="_blank"}*
 
-*Cette page est un travail en cours. Nous apprécions toute contribution que vous pourriez avoir. Si vous souhaitez aider à améliorer cette page, considérez [contributing to our repo](contribute.html).*
+*En cours de progression. Toute amélioration est la bienvenue. Si vous souhaitez participer rendez vous sur [contribuer au repo](contribute.html).*
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -13,18 +13,18 @@ class(biopsy)
 library(dplyr)
 ```
 
-## Overview
+## Vue d'ensemble
 
-Cet exemple passe par certains travaux avec le `biopsy` dataset en utilisant `dplyr` functions pour obtenir un tidy dataset.
+Cet exemple présente certains travaux avec le jeu de données `biopsy` en utilisant les fonctions de `dplyr` pour obtenir un tidy dataset.
 
-### Packages 
+### Les packages 
 
 * [`dplyr`](https://www.rdocumentation.org/packages/dplyr){target="_blank"}
 * [`MASS`](https://www.rdocumentation.org/packages/MASS/versions/7.3-51.1){target="_blank"}
 * [`tidyr`](https://www.rdocumentation.org/packages/tidyr/versions/0.8.2){target="_blank"}
 
 
-## Installing packages
+## Installer les packages
 Écrivez le statements suivant dans le console:
 
 * `install.packages('dplyr')`
@@ -34,10 +34,10 @@ Cet exemple passe par certains travaux avec le `biopsy` dataset en utilisant `dp
 
 **Remarque**: Les trois premiers packages font partie de **tidyverse**, une collection de packages utiles dans R, qui peuvent tous être installés à l'aide de `install.packages('tidyverse')`.
 
-`dplyr` est utilisé pour data wrangling et data transformation dans data frames. Le "d" dans "dplyr" signifie "data frames" qui est le data type le plus utilisé pour stocker des jeux de données dans R.
+`dplyr` est utilisé pour le formattage et la transformation des données dans un dataframe. Le "d" dans "dplyr" signifie "dataframes" qui est la structure de données la plus utilisée pour stocker des jeux de données dans R.
 
 ## Voir les données
-Commençons par charger le package afin que nous puissions obtenir les données en tant que dataframe:
+Commençons par charger le package afin que nous puissions obtenir les données dans des dataframes :
 ```{r, include=TRUE}
 #loading the dplyr library
 library(dplyr)
@@ -54,22 +54,22 @@ glimpse(biopsy)
 head(biopsy)
 ```
 
-## Qu'est ce que Tidy data?
-**Qu'est-ce que cela signifie pour vos données d'être *tidy*?**
+## Qu'est ce qu'une Tidy data?
+**Qu'est-ce que cela signifie pour vos données d'être *tidy* ?**
 
-**Tidy data** a un format normalisé et constitue une manière cohérente d'organiser vos données dans R.
+**Tidy data** est un format normalisé et constitue une manière cohérente d'organiser vos données dans R.
 
-Voici la définition de Tidy Data donnée par Hadley Wickham:
+Voici la définition d'une Tidy Data donnée par Hadley Wickham :
 
->Un ensemble de données est en désordre ou ordonné selon la manière dont les lignes, les colonnes et les tableaux correspondent aux observations, aux variables et aux types. Dans tidy data:
+>Un ensemble de données est en désordre ou ordonné selon la manière dont les lignes, les colonnes et les tableaux correspondent aux observations, aux variables et aux types. Une tidy data :
 >
 >* Chaque variable forme une colonne.
 >
->* Chaque observation forme une rangée.
+>* Chaque observation forme une ligne.
 >
->* Chaque observational unit forme une valeur dans la table.
+>* Chaque unité d'observation est une valeur dans la table.
 >
-*See [r4ds on tidy data](https://r4ds.had.co.nz/tidy-data.html){target="_blank"} for more info.*
+*Voir [r4ds on tidy data](https://r4ds.had.co.nz/tidy-data.html){target="_blank"} pour plus d'info.*
 
 **Quels sont les avantages de tidy data?**
 
@@ -288,7 +288,7 @@ tidy_df <- biopsy_new %>% gather(key = "Tumor_Attributes", value = "Score", -ID,
 tidy_df
 ```
 
-## Helpful Links
-- [r4ds on tidy data](https://r4ds.had.co.nz/tidy-data.html){target="_blank"}: It is always best to learn from the source, so a textbook written by Hadley Wickham is perfect.
-- [DataCamp dplyr course](https://www.datacamp.com/courses/dplyr-data-manipulation-r-tutorial){target="_blank"}: This course covers the different fucntions in dplyr and how they manipulate data.
+## Liens utiles
+- [r4ds on tidy data](https://r4ds.had.co.nz/tidy-data.html){target="_blank"}: C'est toujours mieux d'apprendre de la source, ainsi voici le livre écrit par Hadley Wickham.
+- [DataCamp dplyr course](https://www.datacamp.com/courses/dplyr-data-manipulation-r-tutorial){target="_blank"}: Ce cours couvre les différentes fonctions de dplyr et comment manipuler les données.
 
