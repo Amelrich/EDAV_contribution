@@ -7,7 +7,7 @@
 Cette page contient des liens vers tous les chapitres de *edav.info/*
 
 - Cliquez sur une bannière pour aller à la page souhaitée.
-- Si vous vous demandez, voici un [explication de la signification des couleurs de la bannière](intro.html#how-this-resource-is-structured).
+- Si vous vous demandez, voici une [explication de la signification des couleurs des bannières](intro.html#how-this-resource-is-structured).
 
 ## Index
 <!-- [![Header](images/banners/banner_TITLE.png)](TITLE.html){class="active-banner"} -->
