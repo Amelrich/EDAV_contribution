@@ -11,13 +11,12 @@
 --> Le Vignette a des exemples clairement élaborés disponibles sur : https://cran.r-project.org/web/packages/visNetwork/vignettes/Introduction-to-visNetwork.html
 
 
-La documentation `visNetwork` ne fournit pas le même niveau d’explication que l’original, il est donc intéressant de consulter le `vis.js` documentation ainsi que:
-http://visjs.org/index.html  En particulier, le [interactive examples](http://visjs.org/network_examples.html){target="_blank"} sont particulièrement utiles pour essayer différentes options. Par exemple, vous pouvez tester des options de physique avec cette [network configurator](http://visjs.org/examples/network/physics/physicsConfiguration.html){target="_blank"}. 
+La documentation `visNetwork` ne fournit pas le même niveau d’explication que la documentation original, il est donc intéressant de consulter la documentation de `vis.js` : http://visjs.org/index.html  En particulier, les [exemples interactifs](http://visjs.org/network_examples.html){target="_blank"} sont particulièrement utiles pour essayer différentes options. Par exemple, vous pouvez essayer des options concrètes avec le [network configurator](http://visjs.org/examples/network/physics/physicsConfiguration.html){target="_blank"}. 
 
 
-### Minimum working example
+### L'exemple service minimum
 
-Créer un [node data frame](https://datastorm-open.github.io/visNetwork/nodes.html){target="_blank"} avec un minimum de colonne (doit être appelé `id`) avec node des noms:
+Créer un [node data frame](https://datastorm-open.github.io/visNetwork/nodes.html){target="_blank"} avec au moins une colonne (appelée `id`) contenant le nom des noeuds :
 
 ```{r}
 # nodes
@@ -25,7 +24,7 @@ boroughs <- data.frame(id = c("The Bronx", "Manhattan", "Queens", "Brooklyn", "S
 ```
 
 
-Créer un séparé data frame de [edges](https://datastorm-open.github.io/visNetwork/edges.html){target="_blank"} avec `from` et `to` columns. 
+Créer un autre dataframe contenant les [arêtes](https://datastorm-open.github.io/visNetwork/edges.html){target="_blank"} avec pour colonnes `from` et `to`. 
 
 
 ```{r}
@@ -34,7 +33,7 @@ connections <- data.frame(from = c("The Bronx", "The Bronx", "Queens", "Queens",
 ```
 
 
-Dessine le network avec `visNetwork(nodes, edges)`
+Dessinons le graphe avec `visNetwork(nodes, edges)`
 
 ```{r}
 library(visNetwork)
@@ -42,7 +41,7 @@ visNetwork(boroughs, connections)
 ```
 
 
-Ajouter labels en ajoutant un label column à `nodes`:
+Tu peux ajouter des labels en ajoutant l'argument label à la colonne `nodes`:
 
 ```{r message=FALSE}
 library(dplyr)
@@ -56,22 +55,22 @@ visNetwork(boroughs, connections)
 
 `visNetwork` peut être très lent. 
 
-`%>% visPhysics(stabilization = FALSE)` starts rendering avant que la stabilisation soit complète, ce qui accélère réellement les choses mais vous permet de voir ce qui se passe, ce qui fait une grande différence dans l'expérience utilisateur. (C’est aussi amusant de regarder la network stabilize).  D'autres astuces de performance sont décrites [here](https://datastorm-open.github.io/visNetwork/performance.html){target="_blank"}.
+`%>% visPhysics(stabilization = FALSE)` commence l'affichage avant que la stabilisation soit complète, ce qui accélère réellement les choses mais vous permet de voir ce qui se passe en temps réel. Cela fait une grande différence dans l'expérience utilisateur. (C’est aussi amusant de regarder la stabilisation du graphe). D'autres astuces de performance sont décrites [ici](https://datastorm-open.github.io/visNetwork/performance.html){target="_blank"}.
   
-### Helpful configuration tools  
+### Des outils de configuration utiles  
   
-`%>% visConfigure(enabled = TRUE)` est un outil utile pour configurer les options de manière interactive. Une fois terminé, cliquez sur "generate options" pour que le code reproduise les paramètres. More [here](https://datastorm-open.github.io/visNetwork/configure.html){target="_blank"} (Notez que changer les options puis les visualiser nécessite beaucoup de défilement vertical dans le navigateur. Je ne suis pas sûr si quelque chose peut être fait à ce sujet. Si vous avez une solution, faites le moi savoir!)
+`%>% visConfigure(enabled = TRUE)` est un outil utile pour configurer les options de manière interactive. Une fois terminé, cliquez sur "generate options" pour que le code reproduise les paramètres. Plus d'info [ici](https://datastorm-open.github.io/visNetwork/configure.html){target="_blank"} (Notez que changer les options puis les visualiser nécessite beaucoup le défilement vertical dans le navigateur. Je ne suis pas sûr que quelque chose peut être fait à ce sujet. Si vous avez une solution, n'hésitez pas à partager !)
   
-### Coloring nodes
+### Colorer les noeuds
 
-Ajouter une colonne de noms de couleurs réelles à la nodes data frame:
+Ajouter une colonne avec les vrais noms des couleurs dans le dataframe des noeuds :
 
 ```{r}
 boroughs <- boroughs %>% mutate(is.island = c(FALSE, TRUE, FALSE, FALSE, TRUE)) %>% mutate(color = ifelse(is.island, "blue", "yellow"))
 visNetwork(boroughs, connections)
 ```
 
-### Directed nodes (arrows)
+### Noeuds orientés (flèches)
 
 ```{r}
 visNetwork(boroughs, connections) %>% 
@@ -79,18 +78,18 @@ visNetwork(boroughs, connections) %>%
   
 ```
 
-### Turn off the physics simulation
+### Désactiver le mouvement du graphe
 
-C'est beaucoup plus rapide sans la simulation. Le nodes sont placés au hasard et peuvent être déplacés sans affecter le reste de la network, au moins dans le cas de petites networks.
+C'est beaucoup plus rapide sans la simulation. Le nodes sont placés au hasard et peuvent être déplacés sans affecter le reste du graphe, au moins dans le cas des petits graphes.
 
 ```{r}
 visNetwork(boroughs, connections) %>% 
   visEdges(physics = FALSE)
 ```
 
-### Grey out nodes far from selected (defined by "degree")
+### Griser les noeuds loins de celui selectionné (par définition du degré)
 
-(Cliquez node pour voir l'effet.)
+(Cliquez sur un noeud pour voir l'effet)
 
 ```{r}
 # defaults to 1 degree
