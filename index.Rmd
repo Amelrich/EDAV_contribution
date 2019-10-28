@@ -55,8 +55,7 @@ Joyce Robbins:
 <!-- Colophon -->
 ## Colophon
 
-Le logo de EDAV, les bannières url/404 et les icônes des chapitres associés ont été disgnés par Zach Bogart et publié sous sa permission. 
-The EDAV Logo, the url/404 banners, and associated chapter icon designs are designed by Zach Bogart and published with permission. The url and 404 banners have been adapted into a typeface called [Koji](https://zachbogart.com/koji){target="_blank"}. Selected chapter icons can be accessed/purchased at [The Noun Project](https://thenounproject.com/zachbogart/){target="_blank"}. Please attribute the creator if using them for external purposes (see [their icon attribution guidelines](https://thenounproject.zendesk.com/hc/en-us/articles/200509928-How-do-I-give-creators-credit-in-my-work-){target="_blank"} for more information). 
+Le logo de EDAV, les bannières url/404 et les icônes des chapitres associés ont été disgnés par Zach Bogart et publié sous sa permission. L'url et les bannières 404 ont été adapté pour la police [Koji](https://zachbogart.com/koji){target="_blank"}. Les icônes de chapitre peuvent être trouvées et achetées sur [The Noun Project](https://thenounproject.com/zachbogart/){target="_blank"}. Merci de rendre crédit au créateur si vous les utilisez sur des ressources extérieures (voir [leur directive d'attribution des icônes](https://thenounproject.zendesk.com/hc/en-us/articles/200509928-How-do-I-give-creators-credit-in-my-work-){target="_blank"} pour plus d'information). 
 
 <!-- Adding these nonvisible image files here to trick bookdown into copying them into the images folder -->
 <img src="images/icons/edav_resource_url_404.png" height="0" width = "0">
