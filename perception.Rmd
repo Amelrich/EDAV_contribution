@@ -10,7 +10,7 @@ Cette section contient des ressources pour en savoir plus sur la perception grap
 
 ## Perception
 
-Voici quelques liens vers des ouvrages / articles clés sur la perception:
+Voici quelques liens vers des ouvrages / articles clefs sur la perception:
 
 - [Graphical Perception: Theory, Experimentation, and Application to the Development of Graphical Methods](https://www.jstor.org/stable/2288400){target="_blank"}: Article classique de William Cleveland and Robert McGill
 - [The Elements of Graphing Data](https://clio.columbia.edu/catalog/SCSB-8519758){target="_blank"}: Textbook by William Cleveland
